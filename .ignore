@@ -1,0 +1,7 @@
+*.doc
+
+*.docx
+
+temp
+
+db_config.php
