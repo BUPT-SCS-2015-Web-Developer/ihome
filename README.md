@@ -14,7 +14,7 @@
 
 - yiban_id : 易班id
 - school_id : 学生学号
-- school_name : 用户昵称
+- name : 用户昵称
 - type : 用户类型
 
 ## 生活服务/问题反馈
@@ -29,8 +29,8 @@
 - create_user : 创建者id
 - is_reply : 问题反馈是否回复
 - is_anonymous : 是否匿名【此功能是否直接设置为匿名】
-- is_judge：是否审核过，可以发布
-- hot : 热度
+- is_verify：是否审核过，可以发布
+- fire : 热度
 - reply : 官方回复内容
 - **待解决**：审核通过的问题自动生成关键字：jieba分词？
 
@@ -76,8 +76,9 @@ API
   请求参数
   {
     'text' : 搜索关键词 留空则不添加关键词
-    'type' : 类型 1为生活服务 2为问题反馈 留空则两类型均返回
+    'type' : 类型 1为生活服务 2为问题反馈 留空则两者皆回复
     'sortby' : 默认为time 可选参数为time 与 hot
+    'start' : 从第几个结果开始，默认为0，则传回前十个；10则传回10~19。
   }
   请求成功返回
   {
@@ -117,7 +118,7 @@ API
         'id' : 问题唯一id号
         'type' : 1为生活服务，2为问题反馈
   	  'subject' : 主题
-        'summary' : 内容【是否需要这个?】
+        'content' : 内容【是否需要这个?】
         'create_user' : 创建者id
         'hot' : 热度
         'comment' :[
@@ -167,7 +168,6 @@ API
   创建问题
   请求参数:
   {
-    'user_id' : 用户id【用于session校验，切不可单独使用此数据】,
     'type' : 是生活服务还是反馈问题，
     'subject' : 主题,
     'content' : 内容,
@@ -182,14 +182,15 @@ API
   {
     'status' : 'error'
   }
-
   ```
 
   User.php
 
   ```json
   根据session获得用户信息
-  请求参数:无
+  请求参数:
+  管理员 可传递参数id，查看该学号同学信息，不传参则返回个人信息
+  普通用户返回个人信息
 
   请求成功返回:
   {
@@ -200,6 +201,10 @@ API
   	'type' : 用户类型
     }
   }
+
+  管理员查询失败
+  异常status返回error，查不到此人返回failed  
+
   ```
 
   ​

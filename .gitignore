@@ -1,6 +1,10 @@
 *.doc
 
+
 *.docx
+
 
 temp
 
+
+api/db_config.php
