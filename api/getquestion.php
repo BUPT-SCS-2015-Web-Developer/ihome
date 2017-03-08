@@ -16,16 +16,14 @@
     elseif (array_key_exists('id', $_POST))
         $id = addslashes($_POST['id']);
     else
-    {
         exit();
-    }
 
     $sql_query = "SELECT * FROM `ihome_question` WHERE  `id` = '".$id."'";
     $result = $db->query($sql_query);
     if($result->num_rows == 0){
         exit(json_encode(array('status'=>'failed')));
     }
-    $res = array('status' => 'success','data' => array('comment' => array()));
+    $res = array('status' => 'success','data' => array('is_praise'=>'','is_follow'=>'','comment' => array()));
     foreach ($result as $row => $value) {
         $res['data'] += $value;
     }
@@ -36,7 +34,32 @@
     foreach ($result as $row => $value) {
         $res['data']['comment'][] = $value;
     }
-
     $result->close();
+
+
+    $sql_query = "SELECT * FROM `ihome_praise`
+    WHERE `question_id` = '".$id."' and
+    `user_id` = '".$_SESSION['school_id']."' and
+    `type` = 'praise' and
+    `status` = '1'";
+    $result = $db->query($sql_query);
+    if($result->num_rows != 0)
+        $res['data']['is_praise'] = '1';
+    else {
+        $res['data']['is_praise'] = '0';
+    }
+
+    $sql_query = "SELECT * FROM `ihome_praise`
+    WHERE `question_id` = '".$id."' and
+    `user_id` = '".$_SESSION['school_id']."' and
+    `type` = 'follow' and
+    `status` = '1'";
+    $result = $db->query($sql_query);
+    if($result->num_rows != 0)
+        $res['data']['is_follow'] = '1';
+    else {
+        $res['data']['is_follow'] = '0';
+    }
+
     echo json_encode($res);
 ?>

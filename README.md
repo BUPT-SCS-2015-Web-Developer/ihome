@@ -41,7 +41,7 @@
 * id : 自增段_主键
 * user_id : 用户id
 * question_id : 对应问题id【索引】
-* type : 是关注还是点赞
+* type : 是点赞还是关注 praise和follow
 * status : True正常状态 False已取消/已删除
 
 表iHome_comment
@@ -118,9 +118,13 @@ API
         'id' : 问题唯一id号
         'type' : 1为生活服务，2为问题反馈
   	  'subject' : 主题
-        'content' : 内容【是否需要这个?】
+        'content' : 内容
         'create_user' : 创建者id
-        'hot' : 热度
+        'create_time' : 创建时间
+        'hot' : 热度,
+        'reply' : 回复内容【问题反馈独有】,
+        'is_praise' : 是否点赞,
+     	  'is_follow' : 是否关注,
         'comment' :[
           {
             'floor' : 楼层【注意，有可能有的楼层被删除】,
@@ -129,7 +133,7 @@ API
       	  'reply_floor' : 是否回复某一楼层
           },
     	    {
-            下一个回复
+            下一个回复【评论为生活服务独有】
     	    }
         ]
       } 
@@ -198,13 +202,38 @@ API
     'data' :{
       'school_id' : 学生学号,
   	'school_name' : 用户昵称,
-  	'type' : 用户类型
+  	'type' : 用户类型，
+      'follow':[
+        156,
+        456
+      ]
     }
   }
 
   管理员查询失败
   异常status返回error，查不到此人返回failed  
+  ```
 
+  praise.php
+
+  ```json
+  用于点赞与取消赞，关注与取消关注
+  请求参数:
+  {
+    'id' : 问题id,
+    'type' : praise或follow
+  }
+
+  成功返回
+  {
+    'status' : 'success'
+  }
+
+  失败返回
+  {
+    'status' : 'error'
+  }
   ```
 
   ​
+
