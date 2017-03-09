@@ -2,7 +2,9 @@ var qSettings = {};
 qSettings.sortby = 1; //1推荐问题 2按时间排列 3按热度排列
 qSettings.currentOn = 10;
 
-
+var app = function() {
+    
+}
 
 $(function(){
     $('#searchBox').characterCounter();
