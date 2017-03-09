@@ -1,3 +1,9 @@
+<?php 
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="zh-cn">
   <head>
@@ -17,13 +23,12 @@
             <div class="nav-wrapper container hide-on-med-and-down">
                 <a href="index.php" class="brand-logo">北邮iHome</a>
                 <ul class="right">
-                    <!--
+                  
               <?php 
-              if ($_SESSION['userType'] === "辅导员"){
-                echo "<li><a href='adminform.php'>后台管理</a></li>";
+              if ($_SESSION['type'] === "admin"){
+                echo "<li><a href='admin.php'>后台管理</a></li>";
               }
               ?>
-                    -->
                     
                     <li><a href="my.php">个人中心</a></li>
                 </ul>

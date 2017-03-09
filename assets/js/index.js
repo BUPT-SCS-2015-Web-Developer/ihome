@@ -1,9 +1,37 @@
 var qSettings = {};
 qSettings.sortby = 1; //1推荐问题 2按时间排列 3按热度排列
-qSettings.currentOn = 10;
-
-var app = function() {
-    
+qSettings.start = 0;
+qSettings.recommendedQuestions = [2,3,4];
+var App = function() {
+    var app = this;
+    var errormsg = {};
+    errormsg['']
+    var alertStatus = function(type) {
+        if (type=="success") return;
+        try {
+            Materialize.toast(errormsg[type],4000);
+        } catch(e) {
+            Materialize.toast("未知错误",3000);
+        }
+    }
+    var search = function(text0,type0,sortby0,start0) {
+        
+        $.post("API/getlist.php",{
+            text:text0,
+            type:type0,
+            sortby:sortby0,
+            start:start0
+        },function(data){
+            console.log(data);
+            alertStatus(data['status']);
+        });
+    }
+    var EIButtons = function() {
+        
+    }
+    app.eventInit = function() {
+        
+    }
 }
 
 $(function(){
