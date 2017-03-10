@@ -53,10 +53,10 @@
     if ($row[1]=='2'){
         ?> 
         <tr class="hoverable" id="minus_answered_question_<?php echo $i?>">
-          <td><a href="" class="">问题<?php echo $i?>巴拉巴拉巴拉</a></td><td><a href="#model1" onclick="showmodel()" class="waves-effect waves-teal btn-flat modal-trigger">去评价</a>
+          <td><a href="" class="">问题<?php echo $i?>巴拉巴拉巴拉</a></td><td><a href="#model<?php echo $i?>" onclick="showmodel(<?php echo $i?>)" class="waves-effect waves-teal btn-flat modal-trigger">去评价</a>
           <td><a onclick="minus_answered_question(<?php echo $i?>)"><img src="assets/img/icon_minus_alt.png" class="minus1"></a></td>
           
-           <div id="modal1" class="modal">
+           <div id="modal<?php echo $i?>" class="modal">
             <div class="modal-content">
              <h4>带评价的问题是啥放在这里</h4>
              <div class="row">
@@ -93,7 +93,7 @@
            </div>
             </div>
             <div class="modal-footer">
-              <a href="#!" onclick="hidemodel()"  class=" modal-action modal-close waves-effect waves-green btn-flat">提交</a>
+              <a href="#!" onclick="hidemodel(<?php echo $i?>)"  class=" modal-action modal-close waves-effect waves-green btn-flat">提交</a>
              </div>
            </div>
           </td>
@@ -184,11 +184,13 @@
     $('select').material_select();
   });
 
-  function showmodel(){
-    $('#modal1').openModal();
+  function showmodel(b){
+    $b=b;
+    $('#modal'+b).openModal();
   }
-   function hidemodel(){
-    $('#modal1').closeModal();
+   function hidemodel(b){
+    $b=b
+    $('#modal1'+b).closeModal();
   }
   </script>
 
