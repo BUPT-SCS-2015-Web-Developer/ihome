@@ -183,6 +183,8 @@ nav,nav .brand-logo,nav ul a {
 
 .otherBox i{
     position: relative;
+    display:inline-block;
+    margin-right:4px;
     top:6px;
 }
 
