@@ -44,13 +44,20 @@ nav,nav .brand-logo,nav ul a {
     text-align:center;
     display: none;
 }
-
+.ques h5 {
+    cursor:pointer;
+}
+.ques h5:hover {
+    color:rgb(0,0,100);
+}
 #searchImage {
     position:relative;
     width:50px;
     height:50px;
     border-radius:25px;
     cursor:pointer;
+    background-color:rgba(0,0,0,.12);
+    transition: all 0.3s ease-out;
 }
 #searchImage img{
     width:36px;
@@ -58,23 +65,9 @@ nav,nav .brand-logo,nav ul a {
     margin:7px;
     z-index:999999;
 }
-#searchCircle {
-    position:absolute;
-    left:24px;
-    top:24px;
-    border-radius:0;
-    background-color:rgba(150,155,255,.3);
-    width:0;
-    height:0;
-    transition:all 0.2s ease;
-    z-index:9;
-}
-#searchImage:hover div{
-    left:-2px;
-    top:-2px;
-    width:50px;
-    height:50px;
-    border-radius:25px;
+
+#searchImage:hover{
+   box-shadow:0 0 8px rgba(0,0,0,.9);
 }
 #typeBox {
     color:rgb(10,10,10);
@@ -161,6 +154,9 @@ nav,nav .brand-logo,nav ul a {
     opacity: 1;
 }
 
+.sort.active {
+    color:rgb(100,150,255)!important;
+}
 .ques { 
     margin-left:10px;
     margin-right:10px;
@@ -169,7 +165,10 @@ nav,nav .brand-logo,nav ul a {
     margin-top:24px;
     margin-bottom:3px;
 }
-
+#mainQuesBox {
+    margin:0;
+    padding:0;
+}
 .timeBox {
     position: absolute;
     right:9px;
@@ -185,6 +184,11 @@ nav,nav .brand-logo,nav ul a {
 .otherBox i{
     position: relative;
     top:6px;
+}
+
+#moreBox {
+    text-align: center;
+    color:#8590a6!important;
 }
 
 

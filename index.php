@@ -23,12 +23,12 @@
             <div class="nav-wrapper container hide-on-med-and-down">
                 <a href="index.php" class="brand-logo">北邮iHome</a>
                 <ul class="right">
-                  
+                  <!--
               <?php 
               if ($_SESSION['type'] === "admin"){
                 echo "<li><a href='admin.php'>后台管理</a></li>";
-              }
-              ?>
+              } 
+              ?> -->
                     
                     <li><a href="my.php">个人中心</a></li>
                 </ul>
@@ -50,19 +50,19 @@
             <label for="icon_prefix2">输入你想查询的内容</label>
         </div>
         <p>
-            <input class="with-gap" name="searchType" type="radio" id="test1" checked/>
+            <input class="with-gap" name="searchType" type="radio" id="test1" val="" checked/>
             <label for="test1">全部&nbsp;</label>
-            <input class="with-gap" name="searchType" type="radio" id="test2" />
+            <input class="with-gap" name="searchType" type="radio" id="test2" val="1" />
             <label for="test2">生活服务&nbsp;</label>
-            <input class="with-gap" name="searchType" type="radio" id="test3"  />
+            <input class="with-gap" name="searchType" type="radio" id="test3" val="2"  />
             <label for="test3">问题反馈&nbsp;</label>
         </p>
         </div>
         <div class="col s1 center">
         <div id="searchImage">
-            <div id="searchCircle"></div><img src="assets/img/search.png"></div>
+            <img src="assets/img/search.png"></div>
         </div>
-        </div>
+         </div>
     </div>
     
     <div class="quesBox container box white">
@@ -70,64 +70,22 @@
             <div id="typeBox">
                 <p><a class="type active" id="typeAll" href="#">全部问题</a><a class="type" id="typeAll" href="#">生活服务</a><a class="type" id="typeAll" href="#">问题反馈</a></p>
                 <div id="sortBox">
-                    <a href="#" class="active sortRecommended"><i class="material-icons dp48">thumb_up</i></a>
-                    <a href="#" class="sortTime"><i class="material-icons dp48">query_builder</i></a>
-                    <a href="#" class="sortHot"><i class="material-icons dp48">star</i></a>
+                    <a href="#" class="active sortRecommended sort"><i class="material-icons dp48">thumb_up</i></a>
+                    <a href="#" class="sortTime sort"><i class="material-icons dp48">query_builder</i></a>
+                    <a href="#" class="sortHot sort"><i class="material-icons dp48">star</i></a>
                 </div>
             </div>
         </div>
-        <div class="ques hot">
-            <div class="timeBox">8天前</div>
-            <div class="mainQuesBox">
-                <h5>北邮啥时装空调????</h5>
-                <p>Lorem ipsum satte ferrat, nipem.Lorem ipsum satte ferrat, nipem.Lorem ipsum satte ferrat, nipem.Lorem ipsum satte ferrat, nipem.</p>
-            </div>
-            <div class="otherBox">
-                <p>
-                    <i class="material-icons dp48">star</i>
-                    9999&nbsp;&nbsp;
-                    <i class="material-icons dp48">comment</i>
-                    9
-                </p>
-            </div>
-        </div>
-        <div class="ques hot">
-            <div class="timeBox">8天前</div>
-            <div class="mainQuesBox">
-                <h5>北邮啥时装空调????</h5>
-                <p>Lorem ipsum satte ferrat, nipem.Lorem ipsum satte ferrat, nipem.Lorem ipsum satte ferrat, nipem.Lorem ipsum satte ferrat, nipem.</p>
-            </div>
-            <div class="otherBox">
-                <p>
-                    <i class="material-icons dp48">star</i>
-                    9999&nbsp;&nbsp;
-                    <i class="material-icons dp48">comment</i>
-                    9
-                </p>
-            </div>
-        </div>
-        <div class="ques hot">
-            <div class="timeBox">8天前</div>
-            <div class="mainQuesBox">
-                <h5>还是北邮啥时装空调????</h5>
-                <p>Lorem ipsum satte ferrat, nipem.Lorem ipsum satte ferrat, nipem.Lorem ipsum satte ferrat, nipem.Lorem ipsum satte ferrat, nipem.</p>
-            </div>
-            <div class="otherBox">
-                <p>
-                    <i class="material-icons dp48">star</i>
-                    9999&nbsp;&nbsp;
-                    <i class="material-icons dp48">comment</i>
-                    9
-                </p>
-            </div>
-        </div>
+        <div id="mainQuesBox"></div>
         <div id="moreBox">
-        
+            <p id="moreText">下拉加载更多...</p>
         </div>
     
     </div>
     <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="assets/js/materialize.js"></script>
+    <script src="assets/js/timeago.min.js"></script>
+    <script src="assets/js/dropload.min.js"></script>
     <script src="assets/js/index.js"></script>
 </body>
 
