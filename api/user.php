@@ -35,5 +35,12 @@
         $res['data'] = $value;
     }
     $result->close();
+
+    $sql_query = "SELECT * FROM `ihome_praise` WHERE `user_id` = '".$id."' and `type` = 'follow' and `status` = '1'";
+    $result = $db->query($sql_query);
+    foreach ($result as $key => $value) {
+        $res['data']['follow'][] = $value['question_id'];
+    }
+
     echo json_encode($res);
  ?>
