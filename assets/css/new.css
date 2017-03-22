@@ -1,0 +1,67 @@
+
+
+* {
+    font-family:"Microsoft YaHei","Microsoft Yahei","微软雅黑",微软雅黑,"SimHei","Simhei","黑体",黑体,arial;
+}
+
+body {
+    background-color:#f7f8fa;
+}
+nav,nav .brand-logo,nav ul a {
+    color:#8590a6!important;
+}
+#user {
+    position:relative;
+    top:9px;
+    height:40px;
+    width:40px;
+}
+.container {
+
+}
+.formBox {
+    margin-top:30px;
+    padding:20px;
+    padding-top:35px;
+    color:rgba(10,10,15);
+}
+.box {
+    border: 1px solid #e7eaf1;
+    border-radius: 2px;
+    box-shadow: 0 1px 3px rgba(0,37,55,.05);
+    margin-bottom:15px!important;
+}
+
+.tips {
+    font-size:13px;
+    line-height: 13px;
+    color:#8590a6!important;
+}
+#terms,#instruction{
+    position:absolute;
+    width:90%;
+    max-height:90%;
+    top:5%;
+    left:5%;
+    margin:0 auto;
+    text-align:center;
+    display: none;
+}
+
+#moreBox {
+    display:none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
