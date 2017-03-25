@@ -6,3 +6,5 @@ temp
 
 assets/API/classes/db_configs.php
 assets/API/config.php
+
+API/db_config.php
