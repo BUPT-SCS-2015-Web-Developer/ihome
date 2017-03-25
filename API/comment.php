@@ -56,6 +56,10 @@
         "`status` = '1'";
     $result = $db->query($sql_query);
 
+    $sql_update = "UPDATE `ihome_praise` SET
+        `is_read` = '0' WHERE `question_id` = '".$question_id."'";
+    $action = $db->query($sql_update);
+
     if($result == True)
     {
         echo(json_encode(array('status' => 'success')));
