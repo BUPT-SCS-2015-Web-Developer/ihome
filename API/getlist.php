@@ -1,5 +1,5 @@
 <?php
-header('Content-type:text/json');
+    header('Content-type:text/json');
     session_start();
     include "db_config.php";
     $db = new mysqli($db_host,$db_user,$db_password,$db_database);
@@ -72,6 +72,14 @@ header('Content-type:text/json');
     $result = $db->query($sql_total);
     $res = array('status' => 'success','data' => array());
     foreach ($result as $row => $value) {
+        $sql_comment = "SELECT * FROM `ihome_comment` WHERE `question_id` = '".$value['id']."'";
+        $result_comment = $db->query($sql_comment);
+        $value['commentNum'] = $result_comment->num_rows;
+
+        $sql_praise = "SELECT * FROM `ihome_praise` WHERE `question_id` = '".$value['id']."'";
+        $result_praise = $db->query($sql_praise);
+        $value['praiseNum'] = $result_praise->num_rows;
+
         $res['data'][] = $value;
     }
 

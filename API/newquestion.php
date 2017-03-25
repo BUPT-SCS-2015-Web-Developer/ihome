@@ -1,4 +1,5 @@
 <?php
+    header('Content-type:text/json');
     session_start();
     include "db_config.php";
     $db = new mysqli($db_host,$db_user,$db_password,$db_database);
@@ -50,10 +51,17 @@
         "`is_reply` = '0', ".
         "`is_anonymous` = '".$is_anonymous."'";
     $result = $db->query($sql_query);
-
+    $sql_query = "SELECT * FROM `ihome_question` WHERE
+    `type` = '".$type."' and
+    `subject` = '".$subject."' and
+    `content` = '".$content."'";
+    $result = $db->query($sql_query);
+    foreach ($result as $row => $value) {
+        $id = $value['id'];
+    }
     if($result == True)
     {
-        echo(json_encode(array('status' => 'success')));
+        echo(json_encode(array('status' => 'success', 'data'=>array('id' => $id))));
     }
     else {
         echo(json_encode(array('status' => 'error')));

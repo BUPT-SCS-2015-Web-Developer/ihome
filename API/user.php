@@ -1,4 +1,5 @@
 <?php
+    header('Content-type:text/json');
     session_start();
     if(!array_key_exists('school_id', $_SESSION))
         exit(json_encode(array('status'=>'login first')));
