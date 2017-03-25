@@ -17,15 +17,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
   <title>北邮ihome我的关注 - 北邮易班</title>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-  <link href="assets/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection" />
-  <link href=".css" type="text/css" rel="stylesheet" />
+  <link href="assets/css/new_materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <!--<link href=".css" type="text/css" rel="stylesheet" />-->
  </head>
  <body>
   <header>
 
   </header>
   <main>
-    <div class="container">
+      <div class="parallax-container">
+    <div class="parallax"><img src="assets/img/1.JPG"></div>
+  </div>
+  <div class="section white">
+    <div class="row container">
+      <h2 class="header">我的关注</h2>
+          <div class="container">
     <table>
       <thead>
         <tr>
@@ -53,6 +59,11 @@
       </tbody>
     </table>
     </div>
+    </div>
+  </div>
+  <div class="parallax-container">
+    <div class="parallax"><img src="assets/img/2.JPG"></div>
+  </div>
   </main>
   <footer class="page-footer grey">
    <div class="container">
@@ -76,12 +87,16 @@
   </footer>
   <!--  Scripts-->
   <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
-  <script src="assets/js/materialize.js"></script>
-  <script src="assets/js/index.js"></script>
- </body>
+  <script src="assets/js/new_materialize.js"></script>
+  <!--<script src="assets/js/index.js"></script>-->
+  <script type="text/javascript">
+
+  </script>
+
  <script type="text/javascript">
   $(document).ready(function(){
       $('.minus').hide();
+      $('.parallax').parallax();
   })
 
 
@@ -94,13 +109,11 @@
     $('.minus').hide();
     $('#twobutton').html("<a onclick=\"showminus()\" class=\"waves-effect waves-teal btn-flat\">编辑</a>");
   }
-
- </script>
- <script>
    function minus_guanzhu(a){
     $a=a;
     $('#minus_guanzhu_'+a).hide();
    }
- </script>
+ </script> 
+</body>
 </html>
 
