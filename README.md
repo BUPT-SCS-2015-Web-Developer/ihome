@@ -77,8 +77,8 @@ API
   {
     'text' : 搜索关键词 留空则不添加关键词
     'type' : 类型 1为生活服务 2为问题反馈 留空则两者皆回复
-    'sortby' : 默认为time 可选参数为time 与 hot 若为recommended则为推荐问题(按热度排列)
-    'start' : 从第几个结果开始，默认为0，则传回前十个；10则传回10~19。
+      'sortby' : 默认为time 可选参数为time 与 hot 若为recommended则为推荐问题(按热度排列)
+      'start' : 从第几个结果开始，默认为0，则传回前十个；10则传回10~19。
   }
   请求成功返回
   {
@@ -233,6 +233,34 @@ API
   {
     'status' : 'error'
   }
+  ```
+
+  classify.php
+
+  获得未分配的问题
+
+  followalert.php
+
+  获得用户关注的问题的新信息
+
+  followlist.php
+
+  用户关注问题的列表
+
+  haveread.php
+
+  用户请求此页面后，所有新信息置为已阅
+
+  reply.php
+
+  各部门回答问题，必要参数 id 问题id  reply 回复内容
+
+  setprocessor.php
+
+  分配问题 必要参数id 问题id， processor 处理问题的部门，可选项：
+
+  ```json
+  '管委会','学生事务部','教务部','安全保卫部','后勤保障部','宣传部','医务室','图书馆'
   ```
 
   ​
