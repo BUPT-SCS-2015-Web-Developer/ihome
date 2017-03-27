@@ -1,3 +1,10 @@
+<!--
+index标题缩减 自动补全 防恶意搜索
+1、index.php 
+
+-->
+
+
 <?php 
 
 
@@ -60,10 +67,9 @@
         </p>
         </div>
         <div class="col s1 center">
-        <div id="searchImage">
-            <img src="assets/img/search.png"></div>
-        </div>
+        <a id="searchImage" class="btn-floating btn-large waves-effect waves-light blue-grey darken-2 pulse"><i class="material-icons">search</i></a>
          </div>
+        </div>
     </div>
     
     <div class="quesBox container box white">

@@ -45,7 +45,7 @@ var App = function() {
             if(alertStatus(data['status'])) {
                 $("#moreBox").show();
                 try {
-                    $("#morelink").attr("href","question.php?id="+data['id']);
+                    $("#morelink").attr("href","question.php?id="+data['data']['id']);
                 } catch(e) {
                     console.log(e);
                 }

@@ -1,10 +1,14 @@
 var qSettings = {};
 qSettings.sortby = 1; //1推荐问题 2按时间排列 3按热度排列
+qSettings.searchTime = 1*60 //搜索间隔1秒
+qSettings.searchOK = true;
 qSettings.start = 0;
-qSettings.contentNum = 80;
+qSettings.contentNum = 80; //正文限制字数
 qSettings.prevSettings = {};
-qSettings.full = false;
-qSettings.type = "";
+qSettings.full = false; //是否加载完毕
+qSettings.type = ""; 
+qSettings.searchDistance = 500; //下拉超过一定距离就不能使用回车键搜索
+
 var Ques = function(quesID,qs) {
     var errormsg = {};
     errormsg['error'] = "加载问题详情时遇到数据库错误.";
@@ -235,6 +239,12 @@ var App = function() {
     
     var eventInitButtons = function() {
         $("#searchImage").click(function(){
+            if (!qSettings.searchOK) {
+                Materialize.toast("您搜索得太快了!",3000);
+                return;
+            }
+            qSettings.searchOK = false;
+            setTimeout("qSettings.searchOK = true;",qSettings.searchTime);
             var sSettings = {};
             sSettings.type0 = $('input[name="searchType"]:checked').val();
             sSettings.text0 = $("#searchBox").val();
@@ -250,6 +260,14 @@ var App = function() {
             }
             removeAllData();
             search(sSettings);
+        });
+        
+        $(document).keypress(function(e) { //加入回车键快捷搜索
+            if (e.which == 13 && $(document).scrollTop() < qSettings.searchDistance) {
+                $("#searchImage").click();
+                e.stopImmediatePropagation();
+                e.preventDefault();
+            }
         });
         $(".sort").click(function(e) {
             if (!$(this).hasClass("active")) {

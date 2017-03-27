@@ -50,25 +50,7 @@ nav,nav .brand-logo,nav ul a {
 .ques h5:hover {
     color:rgb(0,0,100);
 }
-#searchImage {
-    position:relative;
-    width:50px;
-    height:50px;
-    border-radius:25px;
-    cursor:pointer;
-    background-color:rgba(0,0,0,.12);
-    transition: all 0.3s ease-out;
-}
-#searchImage img{
-    width:36px;
-    height:36px;
-    margin:7px;
-    z-index:999999;
-}
 
-#searchImage:hover{
-   box-shadow:0 0 8px rgba(0,0,0,.9);
-}
 #typeBox {
     color:rgb(10,10,10);
     position:relative;
@@ -87,6 +69,9 @@ nav,nav .brand-logo,nav ul a {
 }
 .type:hover {
     color:rgb(150,180,190);
+}
+#searchImage i {
+    font-size:2.3em!important;
 }
 .type {
     position: relative;

@@ -75,7 +75,7 @@
         <div class="tips showBox">
             <p>若公开，其他同学能够在主页搜索到您的反馈，否则只有管理员和管委会可以查看。</p>
         </div>
-        <button class="btn waves-effect waves-light" id="submitBtn">提交
+        <button class="btn waves-effect waves-light blue-grey darken-2" id="submitBtn">提交
             <i class="material-icons right">send</i>
         </button>
         <div id="moreBox">
