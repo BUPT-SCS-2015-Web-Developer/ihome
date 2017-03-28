@@ -10,10 +10,8 @@
     
     $db->query("set names 'utf8'");
 
-    if(array_key_exists('id', $_GET))
-        $id = addslashes($_GET['id']);
-    elseif (array_key_exists('id', $_POST))
-        $id = addslashes($_POST['id']);
+    if(array_key_exists('id', $_REQUEST))
+        $id = htmlspecialchars($_REQUEST['id']);
     else
         exit("没有收到数据!");
 
@@ -25,15 +23,28 @@
     $res = array('status' => 'success','data' => array('is_praise'=>'','is_follow'=>'','comment' => array()));
     foreach ($result as $row => $value) {
         $res['data'] += $value;
+        if($res['data']['is_anonymous']=='1')
+        {
+            $res['data']['create_user'] = '0';
+            $res['data']['create_user_name'] = '匿名用户';
+        }
     }
 
-    $sql_query = "SELECT `user_id`, `content`, `floor`, `reply_floor`, `create_time` FROM `ihome_comment` WHERE  `question_id` = '".$id."' and `status` = '1' ORDER BY `floor`";
+    $sql_query = "SELECT `user_id`, `user_name`, `content`, `is_anonymous`, `floor`, `reply_floor`, `create_time` FROM `ihome_comment` WHERE  `question_id` = '".$id."' and `status` = '1' ORDER BY `floor`";
+
     $result = $db->query($sql_query);
-    $i=0;
+    if($result->num_rows != 0) 
     foreach ($result as $row => $value) {
+        if($value['is_anonymous']==1)
+        {
+            $value['user_id'] = '0';
+            $value['user_name'] = '匿名用户';
+        }
         $res['data']['comment'][] = $value;
-    }
-    $result->close();
+    }   
+        $result->close(); 
+    
+    
 
 
     $sql_query = "SELECT * FROM `ihome_praise`
@@ -59,9 +70,13 @@
     else {
         $res['data']['is_follow'] = '0';
     }
+
     echo "<script>window.id = ".$id."</script>";
     $type = $res['data']['type']==1 ? "生活服务" : "问题反馈";
+    $praiseToggle = $res['data']['is_praise'] == 1 ? "已" : "";
+    $followToggle = $res['data']['is_follow'] == 1 ? "已" : "";
 ?>
+
 
 <!DOCTYPE html>
 <html lang="zh-cn">
@@ -104,14 +119,14 @@
 
     <div class="quesBox container white box">
         <h4><?php echo $res['data']['subject'];?></h4>
-        <p id="infoBox"><span id="quesUser"><?php echo $type; ?>&nbsp;&nbsp;<?php echo $res['data']['create_user'];?></span>&nbsp;&nbsp;于&nbsp;&nbsp;<span id="quesTime"><?php echo $res['data']['create_time'];?></span></p>
+        <p id="infoBox"><span id="quesUser"><?php echo $type; ?>&nbsp;&nbsp;<?php echo $res['data']['create_user_name'];?></span>&nbsp;&nbsp;于&nbsp;&nbsp;<span id="quesTime"><?php echo $res['data']['create_time'];?></span></p>
         <hr>
         <pre><?php echo $res['data']['content'];?></pre>
-        <button class="btn waves-effect waves-light left" id="praiseBtn">赞
+        <button class="btn waves-effect waves-light left" id="praiseBtn"><span class="btnToggle"><?php echo $praiseToggle;?></span>赞&nbsp;<span id="praiseNum"><?php echo $res['data']['hot']; ?></span>
             <i class="material-icons right">thumb_up</i>
         </button>
         &nbsp;
-        <button class="btn waves-effect waves-light blue-dar" id="watchBtn">关注
+        <button class="btn waves-effect waves-light blue-dar" id="followBtn"><span class="btnToggle"><?php echo $followToggle;?></span>关注
             <i class="material-icons right">visibility</i>
         </button>
     </div>
@@ -134,27 +149,29 @@
     <div class="commentBox container white box">
         <h5>评论列表</h5>
         <hr>
-        <div class="comment">
-            <span>匿名用户</span>
-            <p>sdjqpoewewdjqpoeidjq[ewidjqp[dwijqwssdjqpoewewdjqpoeidjq[ewidjqp[dwijqwssdjqpoewewdjqpoeidjq[ewidjqp[dwijqwssdjqpoewewdjqpoeidjq[ewidjqp[dwijqwssdjqpoewewdjqpoeidjq[ewidjqp[dwijqwssdjqpoewewdjqpoeidjq[ewidjqp[dwijqws</p>
-        </div>
-        <div class="comment">
-            <span>匿名用户</span>
-            <p>sdjqpoewewdjqpoeidjq[ewidjqp[dwijqwssdjqpoewewdjqpoeidjq[ewidjqp[dwijqwssdjqpoewewdjqpoeidjq[ewidjqp[dwijqwssdjqpoewewdjqpoeidjq[ewidjqp[dwijqwssdjqpoewewdjqpoeidjq[ewidjqp[dwijqwssdjqpoewewdjqpoeidjq[ewidjqp[dwijqws</p>
-            
-        </div>
     <?php 
-        
-        
-    ?>
+    if (is_array($res['data']['comment']) && count($res['data']['comment'])>0)
+        foreach($res['data']['comment'] as $row => $value) {
+            ?>
+        <div class="comment" data-floor="<?php echo $value['floor']; ?>">
+            <span class="commentName"><?php echo $value['user_name']; ?></span>
+            <span class="commentFloor right"><?php echo $value['floor']; ?>L <a href="#" class="commentResponse">回复</a></span>
+            <p><?php echo $value['content']; ?></p>
+        </div>    
+        <?php } else { ?>
+        <p>暂无评论!</p>
+        <?php } ?>
     </div>
     <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="assets/js/materialize.js"></script>
     <script src="assets/js/timeago.min.js"></script>
-    <!--
-    <script src="assets/js/dropload.min.js"></script>
-    -->
+    
     <script src="assets/js/ques.js"></script>
+    <script>
+        qSettings.id = <?php echo $id; ?>;
+        qSettings.is_praise = <?php echo $res['data']['is_praise']; ?>;
+        qSettings.is_follow = <?php echo $res['data']['is_follow']; ?>;
+    </script>
 </body>
 
 </html>

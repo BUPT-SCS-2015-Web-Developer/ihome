@@ -48,7 +48,7 @@
     $sql_query = "INSERT INTO `ihome_comment` SET ".
         "`question_id` = '".$question_id."', ".
         "`user_id` = '".$user_id."', ".
-        "`user_name` = '".$_SESSION['name']."'"
+        "`user_name` = '".$_SESSION['name']."', ".
         "`content` = '".$content."', ".
         "`is_anonymous` = '".$is_anonymous."', ".
         "`create_time` = now(), ".

@@ -1,6 +1,7 @@
 var qSettings = {};
 qSettings.commentTime = 30*100; //30秒内无法再次评论
 qSettings.commentOK = true;
+qSettings.reply_floor = 0;
 
 var Ques = function(quesID,qs) {
     var errormsg = {};
@@ -81,19 +82,10 @@ var Ques = function(quesID,qs) {
 var App = function() {
     var app = this;
     var errormsg = {};
-    errormsg['error'] = "评论时遇到数据库错误.";
+    errormsg['error'] = "数据库错误.";
     errormsg['login first']="请先登录!";
     errormsg['parameter error']="参数错误!";
-    var toggleStatus = function(str) {
-        $("#moreText").text(str);
-    }
-    var removeAllQues = function() {
-        $(".ques").remove();
-    }
-    var removeAllData = function() {
-        $(".ques").remove();
-        currQ = [];
-    }
+    
     var alertStatus = function(type) {
         if (type=="success") return true;
         try {
@@ -103,50 +95,34 @@ var App = function() {
         }
         return false;
     }
-   
-    var search = function(sSettings) {
-        toggleStatus("加载中...");
-        qSettings.full = false;
-        //console.log(sSettings);
-        $.post("API/getlist.php",{
-            search:sSettings.text0,
-            type:sSettings.type0,
-            sortby:sSettings.sortby0,
-            start:sSettings.start0
-        },function(data){
+    var togglePraise = function(type) {
+        if (type=="praise") {
+            $("#praiseBtn").children(".btnToggle").text(qSettings.is_praise == 0 ? "已" : "");
+            $("#praiseNum").text(parseInt($("#praiseNum").text())+(qSettings.is_praise == 0 ? 1 : -1));
+            qSettings.is_praise = qSettings.is_praise == 0 ? 1 : 0;
+            
+        } else {
+            $("#followBtn").children(".btnToggle").text(qSettings.is_follow == 0 ? "已" : "");
+            qSettings.is_follow = qSettings.is_follow == 0 ? 1 : 0;
+        }
+        
+    }
+    var praiseFollow = function(pSettings) {
+        $.post("API/praise.php",pSettings,function(data){
             if(alertStatus(data['status'])) {
-                //console.log("search:",data);
-                var qldata = data['data'];
-                var l = qldata.length;
-                toggleStatus("下拉加载更多...");
-                if (l<10) {
-                    if (l==0) Materialize.toast("没有查询到数据!",3000);
-                    toggleStatus("没有更多了.");
-                    qSettings.full = true;
-                }
-                for (var i=0;i<l;i++) 
-                    if (qSettings.type=="" || qldata[i]['type'] == qSettings.type) {
-                        var newQ = new Ques(null,qldata[i]);
-                        app.newQues(newQ);
-                        currQ.push(newQ);
-                    }         
-                qSettings.start = 10;
-                qSettings.prevSettings = sSettings;
-                qSettings.prevSettings.start0 = 10;
-            } else {
-                toggleStatus("加载失败，请重新搜索.");
+                $("#"+pSettings.type+"Btn").removeClass("disabled");
+                togglePraise(pSettings.type);
             }
         });
     }
-    
     var comment = function(cSettings) {
         qSettings.full = false;
-        //console.log(sSettings);
+        //console.log(cSettings);
         $.post("API/comment.php",{
             id:cSettings.id,
             content:cSettings.content,
             reply_floor:cSettings.reply_floor,
-            is_anonymous:sSettings.is_anonymous
+            is_anonymous:cSettings.is_anonymous
         },function(data){
             if(alertStatus(data['status'])) {
                 console.log("search:",data);
@@ -154,15 +130,6 @@ var App = function() {
             }
         });
     }
-    var sortFunc = {
-        hot:function(a,b) {
-            return b.hot-a.hot;
-        },
-        time:function(a,b) {
-            return b.miliTime-a.miliTime;
-        }
-    }
-
     
     var eventInitButtons = function() {
         $("#submitBtn").click(function(){
@@ -174,11 +141,11 @@ var App = function() {
             setTimeout("qSettings.commentOK = true;",qSettings.commentTime);
             
             var cSettings = {};
-            cSettings.id = window.id;
+            cSettings.id = qSettings.id;
             cSettings.content = $("#comment").val();
             cSettings.is_anonymous = Number($("#anonymous").is(':checked'));
             cSettings.reply_floor = qSettings.reply_floor;
-            if (sSettings.content=="") {
+            if (cSettings.content=="") {
                 Materialize.toast("评论内容不能为空!",3000);
                 return;
             } 
@@ -191,6 +158,23 @@ var App = function() {
                 e.stopImmediatePropagation();
                 e.preventDefault();
             }
+        });
+        
+        $(".commentResponse").click(function(){
+            $("#comment").val("回复"+$(this).parents(".comment").data("floor")+"L: "+$("#comment").val());
+            qSettings.reply_floor = $(this).parents(".comment").data("floor");
+            Materialize.updateTextFields();
+            $("#comment").focus();
+            return;
+        });
+        
+        $("#praiseBtn").click(function(){
+            $("#praiseBtn").addClass("disabled");
+            praiseFollow({id:qSettings.id,type:"praise"});
+        });
+        $("#followBtn").click(function(){
+            $("#followBtn").addClass("disabled");
+            praiseFollow({id:qSettings.id,type:"follow"});
         });
     }
     

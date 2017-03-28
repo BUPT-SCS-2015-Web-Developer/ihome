@@ -49,7 +49,7 @@ nav,nav .brand-logo,nav ul a {
     word-break:break-all;
     color:rgba(10,10,15);
 }
-.comment span,#infoBox{
+.commentName,.commentFloor,#infoBox{
     color:rgb(133, 144, 166);
 }
 .box {
