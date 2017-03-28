@@ -12,10 +12,8 @@
     }
     $db->query("set names 'utf8'");
 
-    if(array_key_exists('id', $_GET))
-        $id = addslashes($_GET['id']);
-    elseif (array_key_exists('id', $_POST))
-        $id = addslashes($_POST['id']);
+    if(array_key_exists('id', $_REQUEST))
+        $id = htmlspecialchars($_REQUEST['id']);
     else
         exit();
 
@@ -27,12 +25,22 @@
     $res = array('status' => 'success','data' => array('is_praise'=>'','is_follow'=>'','comment' => array()));
     foreach ($result as $row => $value) {
         $res['data'] += $value;
+        if($res['data']['is_anonymous']=='1')
+        {
+            $res['data']['create_user'] = '0';
+            $res['data']['create_user_name'] = '匿名用户';
+        }
     }
 
-    $sql_query = "SELECT `user_id`, `content`, `floor`, `reply_floor`, `create_time` FROM `ihome_comment` WHERE  `question_id` = '".$id."' and `status` = '1' ORDER BY `floor`";
+    $sql_query = "SELECT `user_id`, `user_name`, `content`, `is_anonymous`, `floor`, `reply_floor`, `create_time` FROM `ihome_comment` WHERE  `question_id` = '".$id."' and `status` = '1' ORDER BY `floor`";
     $result = $db->query($sql_query);
     $i=0;
     foreach ($result as $row => $value) {
+        if($value['is_anonymous']==1)
+        {
+            $value['user_id'] = '0';
+            $value['user_name'] = '匿名用户';
+        }
         $res['data']['comment'][] = $value;
     }
     $result->close();

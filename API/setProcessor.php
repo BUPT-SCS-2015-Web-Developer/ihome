@@ -14,17 +14,15 @@
         exit(json_encode(array('status'=>'login first')));
     $school_id = $_SESSION['school_id'];
 
-    if(array_key_exists('id', $_GET))
-        $question_id = addslashes($_GET['id']);
-    elseif (array_key_exists('id', $_POST))
-        $question_id = addslashes($_POST['id']);
+    if(array_key_exists('id', $_REQUEST))
+        $question_id = htmlspecialchars($_REQUEST['id']);
     else
         exit(json_encode(array('status'=>'parameter error')));
 
     if(array_key_exists('processor', $_GET))
-        $processor = addslashes($_GET['processor']);
+        $processor = htmlspecialchars($_GET['processor']);
     elseif (array_key_exists('processor', $_POST))
-        $processor = addslashes($_POST['processor']);
+        $processor = htmlspecialchars($_POST['processor']);
     else
         exit(json_encode(array('status'=>'parameter error')));
 

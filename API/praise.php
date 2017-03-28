@@ -13,20 +13,16 @@
         exit(json_encode(array('status'=>'login first')));
     $school_id = $_SESSION['school_id'];
 
-    if(array_key_exists('type', $_GET))
-        $type = addslashes($_GET['type']);
-    elseif (array_key_exists('type', $_POST))
-        $type = addslashes($_POST['type']);
+    if(array_key_exists('type', $_REQUEST))
+        $type = htmlspecialchars($_REQUEST['type']);
     else
         exit(json_encode(array('status'=>'parameter error')));
 
     if($type!='praise' && $type!='follow')
         exit(json_encode(array('status'=>'parameter error')));
 
-    if(array_key_exists('id', $_GET))
-        $question_id = addslashes($_GET['id']);
-    elseif (array_key_exists('id', $_POST))
-        $question_id = addslashes($_POST['id']);
+    if(array_key_exists('id', $_REQUEST))
+        $question_id = htmlspecialchars($_REQUEST['id']);
     else
         exit(json_encode(array('status'=>'parameter error')));
 

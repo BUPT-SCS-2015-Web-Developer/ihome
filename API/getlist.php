@@ -12,33 +12,25 @@
     if(!array_key_exists('school_id', $_SESSION))
         exit(json_encode(array('status'=>'login first')));
 
-    if(array_key_exists('search', $_GET))
-        $search = addslashes($_GET['search']);
-    elseif (array_key_exists('search', $_POST))
-        $search = addslashes($_POST['search']);
+    if(array_key_exists('search', $_REQUEST))
+        $search = htmlspecialchars($_REQUEST['search']);
     else
         $search = '';
 
-    if(array_key_exists('type', $_GET))
-        $type = addslashes($_GET['type']);
-    elseif (array_key_exists('type', $_POST))
-        $type = addslashes($_POST['type']);
+    if(array_key_exists('type', $_REQUEST))
+        $type = htmlspecialchars($_REQUEST['type']);
     else
         $type = '';
 
-    if(array_key_exists('sortby', $_GET))
-        $sortby = addslashes($_GET['sortby']);
-    elseif (array_key_exists('sortby', $_POST))
-        $sortby = addslashes($_POST['sortby']);
+    if(array_key_exists('sortby', $_REQUEST))
+        $sortby = htmlspecialchars($_REQUEST['sortby']);
     else
         $sortby = 'hot';
     if($sortby == 'time')
         $sortby = 'create_time';
 
-    if(array_key_exists('start', $_GET))
-        $start = addslashes($_GET['start']);
-    elseif (array_key_exists('start', $_POST))
-        $start = addslashes($_POST['start']);
+    if(array_key_exists('start', $_REQUEST))
+        $start = htmlspecialchars($_REQUEST['start']);
     else
         $start = '0';
 

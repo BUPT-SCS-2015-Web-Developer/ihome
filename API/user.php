@@ -17,10 +17,8 @@
     if($_SESSION['type'] == 'ordinary')
         $id = $_SESSION['school_id'];
     elseif ($_SESSION['type'] == 'admin') {
-        if(array_key_exists('id', $_GET))
-            $id = addslashes($_GET['id']);
-        elseif (array_key_exists('id', $_POST))
-            $id = addslashes($_POST['id']);
+        if(array_key_exists('id', $_REQUEST))
+            $id = htmlspecialchars($_GET['id']);
         else
         {
             $id = $_SESSION['school_id'];

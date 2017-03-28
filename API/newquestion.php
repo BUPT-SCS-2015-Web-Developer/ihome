@@ -12,31 +12,23 @@
     if(!array_key_exists('school_id', $_SESSION))
         exit(json_encode(array('status'=>'login first')));
 
-    if(array_key_exists('type', $_GET))
-        $type = addslashes($_GET['type']);
-    elseif (array_key_exists('type', $_POST))
-        $type = addslashes($_POST['type']);
+    if(array_key_exists('type', $_REQUEST))
+        $type = htmlspecialchars($_REQUEST['type']);
     else
         exit(json_encode(array('status'=>'parameter error')));
 
-    if(array_key_exists('subject', $_GET))
-        $subject = addslashes($_GET['subject']);
-    elseif (array_key_exists('subject', $_POST))
-        $subject = addslashes($_POST['subject']);
+    if(array_key_exists('subject', $_REQUEST))
+        $subject = htmlspecialchars($_REQUEST['subject']);
     else
         exit(json_encode(array('status'=>'parameter error')));
 
-    if(array_key_exists('content', $_GET))
-        $content = addslashes($_GET['content']);
-    elseif (array_key_exists('content', $_POST))
-        $content = addslashes($_POST['content']);
+    if(array_key_exists('content', $_REQUEST))
+        $content = htmlspecialchars($_REQUEST['content']);
     else
         exit(json_encode(array('status'=>'parameter error')));
 
-    if(array_key_exists('is_anonymous', $_GET))
-        $is_anonymous = addslashes($_GET['is_anonymous']);
-    elseif (array_key_exists('is_anonymous', $_POST))
-        $is_anonymous = addslashes($_POST['is_anonymous']);
+    if(array_key_exists('is_anonymous', $_REQUEST))
+        $is_anonymous = htmlspecialchars($_REQUEST['is_anonymous']);
     else
         exit(json_encode(array('status'=>'parameter error')));
 
