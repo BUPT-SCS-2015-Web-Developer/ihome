@@ -63,6 +63,9 @@
 
     $result = $db->query($sql_total);
     $res = array('status' => 'success','data' => array());
+
+    if($result->num_rows == 0)
+        exit(json_encode(array('status'=>'success', 'data' => array())));
     foreach ($result as $row => $value) {
         $sql_comment = "SELECT * FROM `ihome_comment` WHERE `question_id` = '".$value['id']."'";
         $result_comment = $db->query($sql_comment);

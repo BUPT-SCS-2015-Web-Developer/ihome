@@ -62,13 +62,36 @@
         foreach ($result as $row => $value) {
             $flag = $value['status'];
         }
-        if($flag == '0')
+        if($flag == '0'){
             $flag = '1';
+            $sql_hot = "SELECT * FROM `ihome_question` WHERE `id` = '".$question_id."'";
+            $question = $db->query($sql_hot);
+            foreach ($question as $key => $value) {
+                $hot = $value['hot'];
+            }
+            $hot = $hot+1;
+
+            $sql_hot = "UPDATE `ihome_question` SET
+            `hot` = '".$hot."' WHERE
+            `id` = '".$question_id."'";
+            $db->query($sql_hot);
+        }
         else {
             $flag = '0';
+            $sql_hot = "SELECT * FROM `ihome_question` WHERE `id` = '".$question_id."'";
+            $question = $db->query($sql_hot);
+            foreach ($question as $key => $value) {
+                $hot = $value['hot'];
+            }
+            $hot = $hot-1;
+
+            $sql_hot = "UPDATE `ihome_question` SET
+            `hot` = '".$hot."' WHERE
+            `id` = '".$question_id."'";
+            $db->query($sql_hot);
         }
         $sql_update = "UPDATE `ihome_praise` SET
-    `status` = '".$flag."' WHERE
+        `status` = '".$flag."' WHERE
         `user_id` = '".$school_id."' and
         `question_id` = '".$question_id."' and
         `type` = '".$type."'";

@@ -39,9 +39,13 @@
             `reply`
             from `ihome_question` WHERE `id` = '".$question_id."'";
         $result = $db->query($sql_query);
-        foreach ($result as $key => $value) {
-            $res['data'][] = $value;
-        }
+        if($result == True)
+            if($result->row_nums != 0)
+            {
+                foreach ($result as $key => $value) {
+                    $res['data'][] = $value;
+                }
+            }
     }
     $res['dataNum'] = sizeof($res['data']);
     echo json_encode($res);

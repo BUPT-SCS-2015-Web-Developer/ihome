@@ -38,6 +38,7 @@
         "`content` = '".$content."', ".
         "`create_time` = now(), ".
         "`create_user` = '".$_SESSION['school_id']."', ".
+        "`create_user_name` = '".$_SESSION['name']."', ".
         "`hot` = '0', ".
         "`is_verify` = '0', ".
         "`is_reply` = '0', ".

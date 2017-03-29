@@ -38,12 +38,17 @@
     $result = $db->query($sql_query);
     $floor = 0;
 
-    foreach ($result as $row) {
-        if($floor < $row['floor'])
-            $floor = $row['floor'];
+    if($result == True)
+    {
+        {
+            foreach ($result as $row) {
+                if($floor < $row['floor'])
+                    $floor = $row['floor'];
+            }
+        }
+        $result->close();
     }
     $floor = $floor + 1;
-    $result->close();
 
     $sql_query = "INSERT INTO `ihome_comment` SET ".
         "`question_id` = '".$question_id."', ".

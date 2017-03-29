@@ -1,4 +1,4 @@
-<?php 
+<?php
 
     session_start();
     if(!array_key_exists('school_id', $_SESSION))
@@ -7,7 +7,7 @@
     include "API/db_config.php";
     $db = new mysqli($db_host,$db_user,$db_password,$db_database);
     if (!$db) exit("加载问题详情时遇到数据库错误.");
-    
+
     $db->query("set names 'utf8'");
 
     if(array_key_exists('id', $_REQUEST))
@@ -33,18 +33,18 @@
     $sql_query = "SELECT `user_id`, `user_name`, `content`, `is_anonymous`, `floor`, `reply_floor`, `create_time` FROM `ihome_comment` WHERE  `question_id` = '".$id."' and `status` = '1' ORDER BY `floor`";
 
     $result = $db->query($sql_query);
-    if($result->num_rows != 0) 
-    foreach ($result as $row => $value) {
-        if($value['is_anonymous']==1)
-        {
-            $value['user_id'] = '0';
-            $value['user_name'] = '匿名用户';
+    if($result!=False){
+        foreach ($result as $row => $value) {
+            if($value['is_anonymous']==1)
+            {
+                $value['user_id'] = '0';
+                $value['user_name'] = '匿名用户';
+            }
+            $res['data']['comment'][] = $value;
         }
-        $res['data']['comment'][] = $value;
-    }   
-        $result->close(); 
-    
-    
+        $result->close();
+    }
+
 
 
     $sql_query = "SELECT * FROM `ihome_praise`
@@ -99,12 +99,12 @@
                 <a href="index.php" class="brand-logo">北邮iHome</a>
                 <ul class="right">
                   <!--
-              <?php 
+              <?php
               if ($_SESSION['type'] === "admin"){
                 echo "<li><a href='admin.php'>后台管理</a></li>";
-              } 
+              }
               ?> -->
-                    
+
                     <li><a href="my.php">个人中心</a></li>
                 </ul>
             </div>
@@ -130,13 +130,13 @@
             <i class="material-icons right">visibility</i>
         </button>
     </div>
-    
+
     <div class="newBox container white box">
         <div class="input-field">
             <textarea id="comment" class="materialize-textarea" data-length="500" length="500" maxlength="500"></textarea>
             <label for="comment">请输入评论</label>
         </div>
-        
+
         <button class="btn waves-effect waves-light left" id="submitBtn">提交
             <i class="material-icons right">send</i>
         </button>
@@ -145,11 +145,11 @@
             <label class="tooltipped"  data-position="bottom" data-delay="50" data-tooltip="若不匿名，评论处将显示您的易班昵称" for="anonymous">匿名</label>
         </p>
     </div>
-    
+
     <div class="commentBox container white box">
         <h5>评论列表</h5>
         <hr>
-    <?php 
+    <?php
     if (is_array($res['data']['comment']) && count($res['data']['comment'])>0)
         foreach($res['data']['comment'] as $row => $value) {
             ?>
@@ -157,7 +157,7 @@
             <span class="commentName"><?php echo $value['user_name']; ?></span>
             <span class="commentFloor right"><?php echo $value['floor']; ?>L <a href="#" class="commentResponse">回复</a></span>
             <p><?php echo $value['content']; ?></p>
-        </div>    
+        </div>
         <?php } else { ?>
         <p>暂无评论!</p>
         <?php } ?>
@@ -165,7 +165,7 @@
     <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="assets/js/materialize.js"></script>
     <script src="assets/js/timeago.min.js"></script>
-    
+
     <script src="assets/js/ques.js"></script>
     <script>
         qSettings.id = <?php echo $id; ?>;

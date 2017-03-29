@@ -20,9 +20,14 @@
     if($result == False)
         exit(json_encode(array('status'=>'error')));
     $followList = array();
-    foreach ($result as $key => $value) {
-        $followList[] = $value['question_id'];
-    }
+
+    if($result == True)
+        if($result->row_nums != 0)
+        {
+            foreach ($result as $key => $value) {
+                $followList[] = $value['question_id'];
+            }
+        }
 
     $res = array('status' => 'success','data' => array());
     foreach ($followList as $question_id) {
@@ -38,9 +43,13 @@
             `reply`
             from `ihome_question` WHERE `id` = '".$question_id."'";
         $result = $db->query($sql_query);
-        foreach ($result as $key => $value) {
-            $res['data'][] = $value;
-        }
+        if($result == True)
+            if($result->row_nums != 0)
+            {
+                foreach ($result as $key => $value) {
+                    $res['data'][] = $value;
+                }
+            }
     }
     echo json_encode($res);
  ?>
