@@ -13,12 +13,27 @@
         exit(json_encode(array('status'=>'login first')));
     $school_id = $_SESSION['school_id'];
 
-    $sql_query = "UPDATE `ihome_praise` SET `is_read` = 1 WHERE `user_id` = '".$school_id."'";
-    $result = $db->query($sql_query);
+    if(array_key_exists('id', $_REQUEST))
+    {
+        $question_id = htmlspecialchars($_REQUEST['id']);
+        $sql_query = "UPDATE `ihome_praise` SET `is_read` = 1 WHERE `user_id` = '".$school_id."' and `question_id` = '".$question_id."'";
+        $result = $db->query($sql_query);
 
-    if($result == True)
-        exit(json_encode(array('status'=>'success')));
-    else {
-        exit(json_encode(array('status'=>'error')));
+        if($result == True)
+            exit(json_encode(array('status'=>'success')));
+        else {
+            exit(json_encode(array('status'=>'error')));
+            }
+    }
+    else
+    {
+        $sql_query = "UPDATE `ihome_praise` SET `is_read` = 1 WHERE `user_id` = '".$school_id."'";
+        $result = $db->query($sql_query);
+
+        if($result == True)
+            exit(json_encode(array('status'=>'success')));
+        else {
+            exit(json_encode(array('status'=>'error')));
+            }
     }
  ?>
