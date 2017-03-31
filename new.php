@@ -28,7 +28,7 @@
                 echo "<li><a href='admin.php'>后台管理</a></li>";
               } 
               ?> -->
-                    
+                    <li><a href="new.php">发布问题</a></li>
                     <li><a href="my.php">个人中心</a></li>
                 </ul>
             </div>

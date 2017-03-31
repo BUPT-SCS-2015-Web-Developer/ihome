@@ -1,9 +1,3 @@
-<!--
-index标题缩减 自动补全 防恶意搜索
-
--->
-
-
 <?php 
 
 
@@ -36,7 +30,7 @@ index标题缩减 自动补全 防恶意搜索
                 echo "<li><a href='admin.php'>后台管理</a></li>";
               } 
               ?> -->
-                    
+                    <li><a href="new.php">发布问题</a></li>
                     <li><a href="my.php">个人中心</a></li>
                 </ul>
             </div>
@@ -94,6 +88,13 @@ index标题缩减 自动补全 防恶意搜索
     <!--
     <script src="assets/js/dropload.min.js"></script>
     -->
+    <script>
+        window.hotSubject = {};
+<?php
+    
+    
+?>  
+    </script>
     <script src="assets/js/index.js"></script>
 </body>
 

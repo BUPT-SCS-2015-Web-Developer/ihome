@@ -94,7 +94,7 @@ var App = function() {
     var sQ = $("<div class='ques'></div>");
     sQ.html("<div class='timeBox'>8天前</div><div class='mainQuesBox' data-id='110'><h5>标题</h5><p>正文</p></div><div class='otherBox'><p><i class='material-icons dp48'>star</i><span class='starNum'>9999</span>&nbsp;&nbsp;&nbsp;<i class='material-icons dp48'>comment</i><span class='commentNum'>9</span>&nbsp;&nbsp;<span class='typeBox'><span></p></div>");
     var toggleStatus = function(str) {
-        $("#moreText").text(str);
+        $("#moreText").html(str);
     }
     var removeAllQues = function() {
         $(".ques").remove();
@@ -149,8 +149,11 @@ var App = function() {
                 var l = qldata.length;
                 toggleStatus("下拉加载更多...");
                 if (l<10) {
-                    if (l==0) Materialize.toast("没有查询到数据!",3000);
                     toggleStatus("没有更多了.");
+                    if (l==0) {
+                        Materialize.toast("没有查询到数据!",3000);
+                        toggleStatus("没有查询到，您可以<a href='new.php?content="+sSettings.text0+"'>发布该问题</a>.");
+                    }
                     qSettings.full = true;
                 }
                 for (var i=0;i<l;i++) 
@@ -288,19 +291,27 @@ var App = function() {
             e.preventDefault();
             return;
         });
-        
+         
     }
-    
+    var getHotSubjects = function() {
+        var hotSubjects = {};
+        $.post("API/getHotSubjects.php",{},function(data){
+            if(data['status'] == 'success') {
+               
+                var sdata = data['data'];
+                var l = sdata.length;
+                for (var i=0;i<l;i++) 
+                    hotSubjects[sdata[i]['subject']] = null;   
+            } 
+            $('#searchBox').autocomplete({
+                data: hotSubjects,
+                limit: 20,
+            });
+        });
+    }
     var eventInitForms = function() {
         $('#searchBox').characterCounter();
-        $('#searchBox').autocomplete({
-            data: {
-            "北邮宿舍问题xxxxx": null,
-            "北邮坑爹啊！": null,
-            "苟利国家生死以，岂因祸福避趋之？": null
-            },
-            limit: 20,
-        });
+        getHotSubjects();
         
         $(window).scroll(function() {
             if (!qSettings.full && $(document).scrollTop() >= $(document).height() - $(window).height()) {

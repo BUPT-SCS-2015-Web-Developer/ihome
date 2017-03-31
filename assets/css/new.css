@@ -47,7 +47,9 @@ nav,nav .brand-logo,nav ul a {
     text-align:center;
     display: none;
 }
-
+.showBox {
+    display:none;
+}
 #moreBox {
     display:none;
 }

@@ -30,7 +30,7 @@
         $sortby = 'hot';
     if($sortby == 'time')
         $sortby = 'create_time';
-    if($sortby == 'recommend')
+    if($sortby == 'recommended')
     {
         $list = array();
         $sql_query = "SELECT * FROM `ihome_recommend` WHERE `status` = '1'";

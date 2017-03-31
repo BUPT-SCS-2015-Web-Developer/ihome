@@ -4,7 +4,21 @@ var App = function() {
     errormsg['error'] = "提交问题时遇到数据库错误.";
     errormsg['login first']="请先登录!";
     errormsg['parameter error']="参数错误!";
-    
+    var $get = (function () {
+            var url = window.document.location.href.toString();
+            var u = url.split("?");
+            if (typeof(u[1]) == "string") {
+                u = u[1].split("&");
+                var get = {};
+                for (var i in u) {
+                    var j = u[i].split("=");
+                    get[j[0]] = j[1];
+                }
+                return get;
+            } else {
+                return {};
+            }
+        })();
     
     var alertStatus = function(type) {
         if (type=="success") return true;
@@ -15,14 +29,6 @@ var App = function() {
         }
         return false;
     }
-    /*
-    var search = function(sSettings) {
-        toggleStatus("加载中...");
-        qSettings.full = false;
-        //console.log(sSettings);
-        
-    }
-*/  
     var submitForm = function(e) {
         if($("#quesSubject").val()=="") {
             $("#quesSubject").focus();
@@ -62,6 +68,7 @@ var App = function() {
     
     var eventInitForms = function() {
         $('input,textarea').characterCounter();
+        if ("content" in $get) $('#quesSubject').val($get['content']);
     }
     
     var eventInit = function() {
