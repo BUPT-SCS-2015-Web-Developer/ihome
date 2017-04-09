@@ -35,8 +35,11 @@
     }
 
     $sql_update = "UPDATE `ihome_question` SET
-        `is_reply` = '1', `reply` = '".$reply."', `reply_id` = '".$_SESSION['school_id']."' WHERE
-        `id` = '".$question_id."'";
+        `is_reply` = '1',
+        `reply` = '".$reply."',
+        `reply_id` = '".$_SESSION['school_id']."',
+        `reply_time` = now(),
+        `progress` = '已有答复' WHERE `id` = '".$question_id."'";
     $action = $db->query($sql_update);
     if($action == False)
         $flag = False;

@@ -31,20 +31,10 @@
 
     $res = array('status' => 'success','data' => array());
     foreach ($followList as $question_id) {
-        $sql_query = "SELECT
-            `id`,
-            `type`,
-            `subject`,
-            `content`,
-            `create_user`,
-            `create_time`,
-            `hot`,
-            `is_reply`,
-            `reply`
-            from `ihome_question` WHERE `id` = '".$question_id."'";
+        $sql_query = "SELECT * from `ihome_question` WHERE `id` = '".$question_id."'";
         $result = $db->query($sql_query);
         if($result == True)
-            if($result->row_nums != 0)
+            if($result->num_rows != 0)
             {
                 foreach ($result as $key => $value) {
                     $res['data'][] = $value;

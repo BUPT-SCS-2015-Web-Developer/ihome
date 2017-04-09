@@ -17,6 +17,15 @@
     else
         exit(json_encode(array('status'=>'parameter error')));
 
+    if($type=='1')
+        $is_verify = '1';
+    elseif ($type == '2') {
+        $is_verify = '0';
+    }
+    else{
+        exit(json_encode(array('status'=>'parameter error')));
+    }
+
     if(array_key_exists('subject', $_REQUEST))
         $subject = htmlspecialchars($_REQUEST['subject']);
     else
@@ -40,9 +49,10 @@
         "`create_user` = '".$_SESSION['school_id']."', ".
         "`create_user_name` = '".$_SESSION['name']."', ".
         "`hot` = '0', ".
-        "`is_verify` = '0', ".
+        "`is_verify` = '".$is_verify."', ".
         "`is_reply` = '0', ".
-        "`is_anonymous` = '".$is_anonymous."'";
+        "`is_anonymous` = '".$is_anonymous."',".
+        "`progress` = '等待审核'";
     $result = $db->query($sql_query);
     $sql_query = "SELECT * FROM `ihome_question` WHERE
     `type` = '".$type."' and

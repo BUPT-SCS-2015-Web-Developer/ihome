@@ -30,7 +30,7 @@
     if(!in_array($processor, $group))
         exit(json_encode(array('status'=>'parameter error')));
 
-    $sql_query = "UPDATE `ihome_question` SET `processor` = '".$processor."' WHERE `id` = '".$question_id."'";
+    $sql_query = "UPDATE `ihome_question` SET `processor` = '".$processor."',`progress` = '审核通过，相关部门处理中' WHERE `id` = '".$question_id."'";
     $result = $db->query($sql_query);
     if($result == False)
         exit(json_encode(array('status'=>'error')));
