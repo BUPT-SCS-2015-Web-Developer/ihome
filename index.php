@@ -19,7 +19,29 @@
 </head>
 
 <body>
-    <?php include("header.php"); ?>
+    <header>
+        <nav class="white" role="navigation">
+            <div class="nav-wrapper container hide-on-med-and-down">
+                <a href="index.php" class="brand-logo">北邮iHome</a>
+                <ul class="right">
+                  <!--
+              <?php 
+              if ($_SESSION['type'] === "admin"){
+                echo "<li><a href='admin.php'>后台管理</a></li>";
+              } 
+              ?> -->
+                    <li><a href="new.php">发布问题</a></li>
+                    <li><a href="my.php">个人中心</a></li>
+                </ul>
+            </div>
+            <div class="nav-wrapper hide-on-large-only">
+                <a href="index.php" class="brand-logo">北邮iHome</a>
+                <ul class="left">
+                    <li><a href="my.php"><img id="user" class="circle" src="assets/img/user.png" /></a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
 
     <div class="searchBox container white box">
         <div class="row a1">
