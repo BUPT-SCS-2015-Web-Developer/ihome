@@ -125,7 +125,7 @@
     function todelete(b){
     //$b=b;
     $('#cardtoclone'+b).hide("slow");
-    $.post("delete.php",{id:b},function(){});
+    $.post("API/deletequestion.php",{id:b},function(){});
   }
           $(function(){
          $(".button-collapse").sideNav(); 

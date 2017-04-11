@@ -120,7 +120,7 @@
    function minus_answered_question(a){
     $a=a;
     $('#cardtoclone'+a).hide("slow");
-    $.post("deletequestion.php",{id:a},function(){});
+    $.post("API/deletequestion.php",{id:a},function(){});
    }
 $(function(){
          $(".button-collapse").sideNav(); 

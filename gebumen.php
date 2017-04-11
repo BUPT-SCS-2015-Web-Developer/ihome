@@ -105,12 +105,12 @@
         Materialize.toast('回复成功！', 3000, 'rounded');
     //$b=b;
     $('#modal'+b).modal('close');
-    $.post("reply.php",{id:b,reply:q},function(){});
+    $.post("api/reply.php",{id:b,reply:q},function(){});
   }
     function todelete(b){
     //$b=b;
     $('#cardtoclone'+b).hide("slow");
-    //$.post("delete.php",{id:b},function(){});
+    //$.post("api/deletequestion.php",{id:b},function(){});
   }
           $(function(){
          $(".button-collapse").sideNav(); 

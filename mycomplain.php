@@ -138,7 +138,7 @@
 
   function toast(b){
     Materialize.toast('催办成功！请耐心等待哟~~~', 3000, 'rounded');
-    $.post("urge.php",{id:b},function(){});
+    $.post("api/urge.php",{id:b},function(){});
 
   }
 
@@ -156,7 +156,7 @@
     alert(q1+q2+q3+q4+q5);*/
 
     //向后端发数据，正式用
-    $.post("appraise.php",
+    $.post("api/appraise.php",
   { 
     id:b,
     attitude:$("#attitude"+b).val(),
@@ -178,13 +178,13 @@
    function minus_answered_question(a){
     $a=a;
     $('#acardtoclone'+a).hide("slow");
-    $.post("deletequestion.php",{id:a},function(){});
+    $.post("api/deletequestion.php",{id:a},function(){});
    }
 
     function minus_notanswer_question(a){
     $a=a;
     $('#bcardtoclone'+a).hide("slow");
-    $.post("deletequestion.php",{id:a},function(){});
+    $.post("api/deletequestion.php",{id:a},function(){});
    }
       $(function(){
          $(".button-collapse").sideNav(); 
