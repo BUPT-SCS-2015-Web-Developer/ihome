@@ -16,21 +16,14 @@
   <title>我的关注 - 爱沙河 - 北邮易班</title>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
   <link href="assets/css/admin_and_me.css" type="text/css" rel="stylesheet" />
-  <link href="assets/css/new_materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <link href="assets/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection" />
   <!--<link href=".css" type="text/css" rel="stylesheet" />-->
  </head>
  <body>
-  <header>
-        <nav class="white" role="navigation">
-            <div class="nav-wrapper container hide-on-med-and-down">
-                <a href="index.php" class="brand-logo">爱沙河</a>
-                <ul class="right">
-                </ul>
-            </div>
-
-        </nav>
-  </header>
-
+  <?php include("header.php"); ?>
+    <div class="container">
+        <h5><i class="material-icons right">visibility</i>我关注的问题</h5>
+      </div>
         <div class="quesBox container">
 
         <div class="row">
@@ -44,7 +37,7 @@
  
   <!--  Scripts-->
   <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
-  <script src="assets/js/new_materialize.js"></script>
+  <script src="assets/js/materialize.min.js"></script>
   <!--<script src="assets/js/index.js"></script>-->
   <script type="text/javascript">
             var errormsg = {};
@@ -73,12 +66,13 @@
             if (alertStatus(text['status'])){
                 var qldata=text['data'];
                 for (var a in qldata){
+                    var qussub=qldata[a]['subject'];
                     var qussum=qldata[a]['content'];
                     var qusid=qldata[a]['id'];
 
                     var aclone=$(".cardtoclone:first").clone(true);
                     var aaclone=$(aclone).attr("id","cardtoclone"+qusid);
-                    var aaa=$(aaclone).html("<div class=\"card-content white-text\"><span class=\"card-title\"><a href=\"question.php?id="+qusid+"\" class=\"\">"+qussum+"</a></span><p>"+qussum+"</p></div><div id=\"heart"+qusid+"\" class=\"card-action\"><a onclick=\"minus_guanzhu("+qusid+")\"><img src=\"assets/img/ic_thanked.png\" alt=\"取消关注\"></a></div>");
+                    var aaa=$(aaclone).html("<div class=\"card-content white-text\"><span class=\"card-title\"><a href=\"question.php?id="+qusid+"\" class=\"\">"+qussub+"</a></span><p>"+qussum+"</p></div><div id=\"heart"+qusid+"\" class=\"card-action\"><a onclick=\"minus_guanzhu("+qusid+")\"><img src=\"assets/img/ic_thanked.png\" alt=\"取消关注\"></a></div>");
                   //  console.log(aaa);
                     $(".sethere").append(aaa);
                 }         
@@ -89,6 +83,10 @@
                 //toggleStatus("加载失败，请重新搜索.");          
             }
         });
+      
+      $(function(){
+         $(".button-collapse").sideNav(); 
+      });
   </script>
 
  <script type="text/javascript">
