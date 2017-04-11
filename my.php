@@ -23,13 +23,25 @@
   <?php include("header.php"); ?>
   <main>
 
-    <div class="row container">
-       <div class="carousel">
-    <a class="carousel-item c_one" onclick="c_one_click()"><h4>系统通知</h4></a>
-    <a class="carousel-item c_two" onclick="c_two_click()"><h4>我的提问</h4></a>
-    <a class="carousel-item c_three" onclick="c_three_click()"><h4>我的反馈</h4></a>
-    <a class="carousel-item c_four" onclick="c_four_click()"><h4>我的关注</h4></a>
-  </div>
+    <div class="container">
+      <div class="row">
+        <div class="col s12">
+          <div class="card white">
+            <table class="centered">
+              <tbody>
+                <tr><td></td><td></td></tr>
+                <tr>
+                  <td><a class="waves-effect waves-light btn-large blue-grey lighten-2" href="mymessage.php">系统通知</a></td><td><a class="waves-effect waves-light btn-large blue-grey lighten-3" href="myquestion.php">我的提问</a></td>
+                </tr>
+                <tr>
+                  <td><a class="waves-effect waves-light btn-large blue-grey lighten-4" href="mycomplain.php">我的反馈</a></td><td><a class="waves-effect waves-light btn-large blue-grey lighten-5" href="myattention.php">我的关注</a></td>
+                </tr>
+                <tr><td></td><td></td></tr>
+              </tbody>
+            </table>
+          </div>
+      </div>
+    </div>
   </div>
 
 
@@ -38,61 +50,6 @@
   <!--  Scripts-->
   <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="assets/js/materialize.min.js"></script>
-
-  <script type="text/javascript">
-      $(document).ready(function(){
-          $(".button-collapse").sideNav();
-      $('.carousel').carousel({padding: 100});
-    });
-
-      var flag=0;
-      var count1=0;
-      var count2=0;
-      var count3=0;
-      var count4=0;
-      function c_one_click(){
-        if (flag==0){
-          flag=1;
-          self.location.href="mymessage.php"
-        } 
-        else if(flag==1){
-          if (count1==0){
-            count1=1;
-          }
-          else if(count1==1){
-            self.location.href="mymessage.php"
-            count1=0;
-          }
-        }
-      }
-      function c_two_click(){
-        if (count2==0){
-          count2=1;
-        }
-        else if(count2==1){
-          self.location.href="myquestion.php"
-          count2=0;
-        }
-      }
-      function c_three_click(){
-        if (count3==0){
-          count3=1;
-        }
-        else if(count3==1){
-          self.location.href="mycomplain.php"
-          count3=0;
-        }
-      }
-      function c_four_click(){
-        if (count4==0){
-          count4=1;
-        }
-        else if(count4==1){
-          self.location.href="myattention.php"
-          count4=0;
-        }
-      }
-  </script>
 
  </body>
 </html>

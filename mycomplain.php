@@ -103,18 +103,23 @@
                     var qussum=qldata[a]['content'];
                     var qusid=qldata[a]['id'];
                     var quspro=qldata[a]['progress'];
+                    var type=qldata[a]['listType'];
+
+                    if(type=="solved"){
 
                     var aclone=$(".acardtoclone:first").clone(true);
                     var aaclone=$(aclone).attr("id","acardtoclone"+qusid);
                     var aaa=$(aaclone).html("<div class=\"card-content white-text\"><span class=\"card-title\"><a href=\"question.php?id="+qusid+"\" class=\"\">"+qussum+"</a></span><p>"+qussum+"</p></div><div class=\"card-action\"><a href=\"#\" onclick=\"minus_answered_question("+qusid+")\">删除</a><a href=\"#modal"+qusid+"\" onclick=\"showmodel("+qusid+")\" id=\"comment"+qusid+"\">去评价</a><div id=\"modal"+qusid+"\" class=\"modal\"><div class=\"modal-content\"><h4></h4><div class=\"row\"><form class=\"col s12\"><div class=\"row\"><div class=\"input-field col s12\"><select id=\"attitude"+qusid+"\"> <option value=\"\" disabled selected>请选择</option><option value=\"1\">1</option><option value=\"2\">2</option><option value=\"3\">3</option><option value=\"4\">4</option><option value=\"5\">5</option></select><label>服务态度</label></div><div class=\"input-field col s12\"><select id=\"result"+qusid+"\"><option value=\"\" disabled selected>请选择</option><option value=\"1\">1</option><option value=\"2\">2</option><option value=\"3\">3</option><option value=\"4\">4</option><option value=\"5\">5</option></select><label>处理结果</label></div><div class=\"input-field col s12\"><select id=\"efficiency"+qusid+"\"><option value=\"\" disabled selected>请选择</option><option value=\"1\">1</option><option value=\"2\">2</option><option value=\"3\">3</option><option value=\"4\">4</option><option value=\"5\">5</option></select><label>办理效率</label></div><div class=\"input-field col s12\"><select id=\"all_in_all"+qusid+"\"><option value=\"\" disabled selected>请选择</option><option value=\"1\">1</option><option value=\"2\">2</option><option value=\"3\">3</option><option value=\"4\">4</option><option value=\"5\">5</option></select><label>总体满意度</label></div><div class=\"input-field col s12\"><textarea id=\"description"+qusid+"\" class=\"materialize-textarea\"></textarea><label for=\"textarea1\">文字评价</label></div></div></form></div></div><div class=\"modal-footer\"><a href=\"#!\"  type=\"submit\"  name=\"action\" onclick=\"hidemodel("+qusid+")\"  class=\" modal-action modal-close waves-effect waves-green btn-flat\">提交</a></div></div>");
                   //  console.log(aaa);
-                    $(".sethere1").append(aaa);
+                    $(".sethere1").append(aaa);}
+                    
+                    else if(type=="unsolved"){
 
                     var bclone=$(".bcardtoclone:first").clone(true);
                     var bbclone=$(bclone).attr("id","bcardtoclone"+qusid);
                     var bbb=$(bbclone).html("<div class=\"card-content white-text\"><span class=\"card-title\"><a href=\"question.php?id="+qusid+"\" class=\"\">"+qussum+"</a></span><p>"+qussum+"</p></div><div class=\"card-action\"><a>"+quspro+"<a><a onclick=\"minus_notanswer_question("+qusid+")\">删除</a><a onclick=\"toast("+qusid+")\" >催办</a><div> ");
                   //  console.log(aaa);
-                    $(".sethere2").append(bbb);
+                    $(".sethere2").append(bbb);}
                 }         
                 //qSettings.start = 10;
                 //qSettings.prevSettings = sSettings;
