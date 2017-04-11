@@ -40,7 +40,7 @@
             from `ihome_question` WHERE `id` = '".$question_id."'";
         $result = $db->query($sql_query);
         if($result == True)
-            if($result->num_rows != 0)
+            if($result->row_nums != 0)
             {
                 foreach ($result as $key => $value) {
                     $res['data'][] = $value;

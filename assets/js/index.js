@@ -92,7 +92,7 @@ var App = function() {
     errormsg['login first']="请先登录!";
     var currQ = [];
     var sQ = $("<div class='ques'></div>");
-    sQ.html("<div class='timeBox'>8天前</div><div class='mainQuesBox' data-id='110'><h5>标题</h5><p>正文</p></div><div class='otherBox'><p><i class='material-icons dp48'>star</i><span class='starNum'>9999</span>&nbsp;&nbsp;&nbsp;<i class='material-icons dp48'>comment</i><span class='commentNum'></span>&nbsp;&nbsp;<span class='typeBox'><span></p></div>");
+    sQ.html("<div class='timeBox'>8天前</div><div class='mainQuesBox' data-id='110'><h5>标题</h5><p>正文</p></div><div class='otherBox'><p><i class='material-icons dp48'>star</i><span class='starNum'>9999</span>&nbsp;&nbsp;&nbsp;<i class='material-icons dp48'>comment</i><span class='commentNum'>9</span>&nbsp;&nbsp;<span class='typeBox'><span></p></div>");
     var toggleStatus = function(str) {
         $("#moreText").html(str);
     }
@@ -186,7 +186,7 @@ var App = function() {
                 qSettings.start += 10;
                 qSettings.prevSettings.start0 +=10; 
                 if (l<10) {
-                    if (l==0) Materialize.toast("没有更多了!",3000);
+                    if (l==0) Materialize.toast("没有查询到数据!",3000);
                     toggleStatus("没有更多了.");
                     qSettings.full = true;
                     qSettings.start = 0;

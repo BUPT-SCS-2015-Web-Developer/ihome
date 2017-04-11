@@ -19,7 +19,7 @@
     $res = array('status' => 'success','data' => array());
 
     if($result == True)
-        if($result->num_rows != 0)
+        if($result->row_nums != 0)
         {
             foreach ($result as $row => $value) {
                 $res['data'][] = $value;
