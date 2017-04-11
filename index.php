@@ -9,7 +9,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
-    <title>北邮iHome - 北邮易班</title>
+    <title>爱沙河 - 北邮易班</title>
     <link href="assets/css/materialize.min.css" type="text/css" rel="stylesheet" />
     <link href="assets/css/index.css" type="text/css" rel="stylesheet" />
     <link href="assets/css/materialize_font.css" rel="stylesheet" />
@@ -22,12 +22,12 @@
     <header>
         <nav class="white" role="navigation">
             <div class="nav-wrapper container hide-on-med-and-down">
-                <a href="index.php" class="brand-logo">北邮iHome</a>
+                <a href="index.php" class="brand-logo">爱沙河</a>
                 <ul class="right">
                   <!--
               <?php 
               if ($_SESSION['type'] === "admin"){
-                echo "<li><a href='admin.php'>后台管理</a></li>";
+                echo "<li><a href='guanweihui.php'>后台管理</a></li>";
               } 
               ?> -->
                     <li><a href="new.php">发布问题</a></li>

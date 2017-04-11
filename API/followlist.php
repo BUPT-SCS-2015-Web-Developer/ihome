@@ -22,7 +22,7 @@
     $followList = array();
 
     if($result == True)
-        if($result->row_nums != 0)
+        if($result->num_rows != 0)
         {
             foreach ($result as $key => $value) {
                 $followList[] = $value['question_id'];
