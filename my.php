@@ -6,8 +6,6 @@
   else{
     $user=$_SESSION['id'];
   }*/
-  $con = mysqli_connect('localhost', 'root', 'jmy5zhentan5') or die ("不能连接数据库:");
-  mysqli_select_db($con,'yiban');
 ?>
 
 <!DOCTYPE html>
@@ -15,23 +13,14 @@
  <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
-  <title>北邮ihome个人页面 - 北邮易班</title>
+  <title>个人主页 - 爱沙河 - 北邮易班</title>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" >
   <link href="assets/css/admin_and_me.css" type="text/css" rel="stylesheet" />
-  <link href="assets/css/new_materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <link href="assets/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection" />
   <!--<link href=".css" type="text/css" rel="stylesheet" />-->
  </head>
  <body>
-  <header>
-        <nav class="white" role="navigation">
-            <div class="nav-wrapper container hide-on-med-and-down">
-                <a href="index.php" class="brand-logo">北邮iHome</a>
-                <ul class="right">
-                </ul>
-            </div>
-
-        </nav>
-  </header>
+  <?php include("header.php"); ?>
   <main>
 
     <div class="row container">
@@ -45,33 +34,14 @@
 
 
   </main>
-  <footer class="page-footer grey">
-   <div class="container">
-    <div class="row">
-     <div class="col l4 offset-l2 s12">
-      <h5 class="white-text">Links</h5>
-      <ul>
-       <li><a class="grey-text text-lighten-3" href="#!">使用说明</a></li>
-       <li><a class="grey-text text-lighten-3" href="#!">使用条款</a></li>
-       <li><a class="grey-text text-lighten-3" href="#!">意见反馈</a></li>
-      </ul>
-     </div>
-    </div>
-   </div>
-   <div class="footer-copyright">
-    <div class="container">
-      Copyright&copy; 北邮易班学生发展中心
-     <a class="grey-text text-lighten-3" href="http://buptyiban.org/">BUPTYiban</a>
-    </div>
-   </div>
-  </footer>
+
   <!--  Scripts-->
   <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
-  <script src="assets/js/new_materialize.js"></script>
-  <script src="assets/js/new_materialize.min.js"></script>
+  <script src="assets/js/materialize.min.js"></script>
 
   <script type="text/javascript">
       $(document).ready(function(){
+          $(".button-collapse").sideNav();
       $('.carousel').carousel({padding: 100});
     });
 

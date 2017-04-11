@@ -114,8 +114,8 @@
     }
 
     foreach($res['data'] as $val => $k){
-        if(strlen($res['data'][$val]['content']) > 15){
-            $res['data'][$val]['content'] = mb_substr($res['data'][$val]['content'], 0, 10, 'utf-8');
+        if(strlen($res['data'][$val]['content']) > 50){
+            $res['data'][$val]['content'] = mb_substr($res['data'][$val]['content'], 0, 50, 'utf-8');
             $res['data'][$val]['content'] = $res['data'][$val]['content']."...";
         }
     }

@@ -93,34 +93,19 @@
 </head>
 
 <body>
-    <header>
-        <nav class="white" role="navigation">
-            <div class="nav-wrapper container hide-on-med-and-down">
-                <a href="index.php" class="brand-logo">北邮iHome</a>
-                <ul class="right">
-                  <!--
-              <?php
-              if ($_SESSION['type'] === "admin"){
-                echo "<li><a href='admin.php'>后台管理</a></li>";
-              }
-              ?> -->
-                    <li><a href="new.php">发布问题</a></li>
-                    <li><a href="my.php">个人中心</a></li>
-                </ul>
-            </div>
-            <div class="nav-wrapper hide-on-large-only">
-                <a href="index.php" class="brand-logo">北邮iHome</a>
-                <ul class="left">
-                    <li><a href="my.php"><img id="user" class="circle" src="assets/img/user.png" /></a></li>
-                </ul>
-            </div>
-        </nav>
-    </header>
+    <?php include("header.php"); ?>
 
     <div class="quesBox container white box">
         <h4><?php echo $res['data']['subject'];?></h4>
         <p id="infoBox"><span id="quesUser"><?php echo $type; ?>&nbsp;&nbsp;<?php echo $res['data']['create_user_name'];?></span>&nbsp;&nbsp;于&nbsp;&nbsp;<span id="quesTime"><?php echo $res['data']['create_time'];?></span></p>
         <hr>
+        <?php if ($type==2) {
+            if ($res['data']['is_reply']==1) { ?>
+        <h5><?php echo $res['data']['processor']; ?>的回复:</h5>
+        <p><?php echo $res['data']['reply']; ?></p>
+        <?php } else { ?> 
+        <h5><?php echo $res['data']['progress']; ?></h5>
+        <?php } echo "<hr>"; }?>
         <pre><?php echo $res['data']['content'];?></pre>
         <button class="btn waves-effect waves-light left" id="praiseBtn"><span class="btnToggle"><?php echo $praiseToggle;?></span>赞&nbsp;<span id="praiseNum"><?php echo $res['data']['hot']; ?></span>
             <i class="material-icons right">thumb_up</i>

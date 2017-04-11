@@ -16,16 +16,7 @@
 </head>
 
 <body>
-    <header>
-        <nav class="white" role="navigation">
-            <div class="nav-wrapper container hide-on-med-and-down">
-                <a href="index.php" class="brand-logo">爱沙河</a>
-                <ul class="right">
-                </ul>
-            </div>
-
-        </nav>
-    </header>
+    <?php include("header.php"); ?> 
           <div class="quesBox container">
 
         <div class="row">
@@ -136,6 +127,9 @@
     $('#cardtoclone'+b).hide("slow");
     $.post("delete.php",{id:b},function(){});
   }
+          $(function(){
+         $(".button-collapse").sideNav(); 
+      });
   </script>
 
     

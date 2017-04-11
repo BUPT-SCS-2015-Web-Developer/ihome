@@ -312,7 +312,7 @@ var App = function() {
     var eventInitForms = function() {
         $('#searchBox').characterCounter();
         getHotSubjects();
-        
+        $(".button-collapse").sideNav();
         $(window).scroll(function() {
             if (!qSettings.full && $(document).scrollTop() >= $(document).height() - $(window).height()) {
                 more();

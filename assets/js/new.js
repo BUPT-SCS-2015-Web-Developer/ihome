@@ -67,6 +67,7 @@ var App = function() {
     }
     
     var eventInitForms = function() {
+        $(".button-collapse").sideNav();
         $('input,textarea').characterCounter();
         if ("content" in $get) $('#quesSubject').val($get['content']);
     }

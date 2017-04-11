@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
     <title>问题反馈页 - 爱沙河 - 北邮易班</title>
     <link href="assets/css/admin_and_me.css" type="text/css" rel="stylesheet" />
-    <link href="assets/css/new_materialize.min.css" type="text/css" rel="stylesheet" />
+    <link href="assets/css/materialize.min.css" type="text/css" rel="stylesheet" />
 </head>
 
 <body>
@@ -40,16 +40,10 @@
 
 
     <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="assets/js/new_materialize.js"></script>
+    <script src="assets/js/materialize.min.js"></script>
       <script type="text/javascript">
       $(document).ready(function(){
-    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
-    //$('.modal-trigger').leanModal({
-    //dismissible: true, // 点击模态框外部则关闭模态框
-    //opacity: .5, // 背景透明度
-    //in_duration: 300, // 切入时间
-   // out_duration: 200, // 切出时间
-      //});
+
         var errormsg = {};
             errormsg['error'] = "xxx时遇到数据库错误.";
             errormsg['login first']="请先登录!";
@@ -118,12 +112,11 @@
     $('#cardtoclone'+b).hide("slow");
     //$.post("delete.php",{id:b},function(){});
   }
+          $(function(){
+         $(".button-collapse").sideNav(); 
+      });
   </script>
-    <!--
-    <script src="assets/js/timeago.min.js"></script>
-    
-    <script src="assets/js/dropload.min.js"></script><script src="assets/js/index.js"></script>
-    -->
+
     
 </body>
 </html>

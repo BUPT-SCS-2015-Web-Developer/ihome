@@ -16,20 +16,11 @@
   <title>我的提问 - 爱沙河 - 北邮易班</title>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
   <link href="assets/css/admin_and_me.css" type="text/css" rel="stylesheet" />
-  <link href="assets/css/new_materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <link href="assets/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection" />
   <!--<link href=".css" type="text/css" rel="stylesheet" />-->
  </head>
  <body>
-  <header>
-        <nav class="white" role="navigation">
-            <div class="nav-wrapper container hide-on-med-and-down">
-                <a href="index.php" class="brand-logo">北邮iHome</a>
-                <ul class="right">
-                </ul>
-            </div>
-
-        </nav>
-  </header>
+  <?php include("header.php"); ?>
        <div class="quesBox container">
 
         <div class="row">
@@ -107,12 +98,13 @@
                     //qSettings.full = true;
                 //}
                 for (var a in qldata){
+                    var qussub=qldata[a]['subject'];
                     var qussum=qldata[a]['content'];
                     var qusid=qldata[a]['id'];
 
                     var aclone=$(".cardtoclone:first").clone(true);
                     var aaclone=$(aclone).attr("id","cardtoclone"+qusid);
-                    var aaa=$(aaclone).html("<div class=\"card-content white-text\"><span class=\"card-title\"><a href=\"question.php?id="+qusid+"\" class=\"\">"+qussum+"</a></span><p>"+qussum+"</p></div><div class=\"card-action\"><a onclick=\"minus_answered_question("+qusid+")\">删除</a><div>");
+                    var aaa=$(aaclone).html("<div class=\"card-content white-text\"><span class=\"card-title\"><a href=\"question.php?id="+qusid+"\" class=\"\">"+qussub+"</a></span><p>"+qussum+"</p></div><div class=\"card-action\"><a onclick=\"minus_answered_question("+qusid+")\">删除</a><div>");
                   //  console.log(aaa);
                     $(".sethere").append(aaa);
                 }         
@@ -130,7 +122,9 @@
     $('#cardtoclone'+a).hide("slow");
     $.post("deletequestion.php",{id:a},function(){});
    }
-
+$(function(){
+         $(".button-collapse").sideNav(); 
+      });
  </script>
   </body>
 
