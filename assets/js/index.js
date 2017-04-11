@@ -310,6 +310,7 @@ var App = function() {
         });
     }
     var eventInitForms = function() {
+        $(".button-collapse").sideNav();
         $('#searchBox').characterCounter();
         getHotSubjects();
         
