@@ -29,6 +29,9 @@ session_start();
         </div>
 
       </div>
+         <div class="fixed-action-btn horizontal click-to-toggle" id="caozuobutton">
+    <a class="btn-floating btn-large blue-grey lighten-3" onclick="showcaozuo()">操作</a>
+  </div>
 
   <!--  Scripts-->
   <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -60,16 +63,27 @@ session_start();
             var text = text_str;
             if (alertStatus(text['status'])){
                 var qldata=text['data'];
-                for (var a in qldata){
-                    var qussub=qldata[a]['subject'];
-                    var qussum=qldata[a]['content'];
-                    var qusid=qldata[a]['id'];
+                var l=0;
+                for(var a in qldata){l++;}
+                //alert(l);
+                //toggleStatus("下拉加载更多...");
+                //if (l<10) {
+                if (l==0) $(".sethere").append("<div class=\"card white\"><div class=\"card-content white-text\"><span class=\"card-title\"></span><p>没有查询到信息！</p></div></div>");
+                    //toggleStatus("没有更多了.");
+                    //qSettings.full = true;
+                //}
+                else{
+                  for (var a in qldata){
+                      var qussub=qldata[a]['subject'];
+                      var qussum=qldata[a]['content'];
+                      var qusid=qldata[a]['id'];
 
-                    var aclone=$(".cardtoclone:first").clone(true);
-                    var aaclone=$(aclone).attr("id","cardtoclone"+qusid);
-                    var aaa=$(aaclone).html("<div class=\"card-content white-text\"><span class=\"card-title\"><a href=\"question.php?id="+qusid+"\" class=\"\">"+qussub+"</a></span><p>"+qussum+"</p></div><div id=\"heart"+qusid+"\" class=\"card-action\"><a onclick=\"minus_guanzhu("+qusid+")\"><img src=\"assets/img/ic_thanked.png\" alt=\"取消关注\"></a></div>");
-                  //  console.log(aaa);
-                    $(".sethere").append(aaa);
+                      var aclone=$(".cardtoclone:first").clone(true);
+                      var aaclone=$(aclone).attr("id","cardtoclone"+qusid);
+                      var aaa=$(aaclone).html("<div class=\"card-content white-text\"><span class=\"card-title\"><a href=\"question.php?id="+qusid+"\" class=\"\">"+qussub+"</a></span><p>"+qussum+"</p></div><div id=\"heart"+qusid+"\" class=\"card-action\"><a onclick=\"minus_guanzhu("+qusid+")\"><img src=\"assets/img/ic_thanked.png\" alt=\"取消关注\"></a></div>");
+                    //  console.log(aaa);
+                      $(".sethere").append(aaa);
+                  }
                 }
                 //qSettings.start = 10;
                 //qSettings.prevSettings = sSettings;
@@ -77,6 +91,7 @@ session_start();
             } else {
                 //toggleStatus("加载失败，请重新搜索.");
             }
+            $('.card-action').hide();
         });
 
       $(function(){
@@ -95,6 +110,16 @@ session_start();
     $('#heart'+a).html("<a onclick=\"minus_guanzhu("+a+")\"><img src=\"assets/img/ic_thanked.png\" alt=\"取消关注\"></a>");
     $.post("API/praise.php",{id:a,type:"follow"},function(){});
    }
+ </script>
+  <script type="text/javascript">
+function showcaozuo(){
+  $('.card-action').show("slow");
+  $('#caozuobutton').html("<a class=\"btn-floating btn-large blue-grey lighten-3\" onclick=\"hidecaozuo()\">恢复</a>")
+}
+function hidecaozuo(){
+  $('.card-action').hide("slow");
+  $('#caozuobutton').html("<a class=\"btn-floating btn-large blue-grey lighten-3\" onclick=\"showcaozuo()\">操作</a>")
+}
  </script>
 </body>
 </html>

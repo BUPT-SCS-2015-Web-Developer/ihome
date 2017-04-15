@@ -3,6 +3,7 @@ session_start();
 //include "assets/API/header_api_session.php";
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
  <head>
@@ -26,6 +27,9 @@ session_start();
         </div>
 
       </div>
+         <div class="fixed-action-btn horizontal click-to-toggle" id="caozuobutton">
+    <a class="btn-floating btn-large blue-grey lighten-3" onclick="showcaozuo()">操作</a>
+  </div>
 
   <!--  Scripts-->
   <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -56,23 +60,27 @@ session_start();
             var text = text_str;
             if (alertStatus(text['status'])){
                 var qldata=text['data'];
-                //var l=qldata.data.length;
+                var l=0;
+                for(var a in qldata){l++;}
                 //alert(l);
                 //toggleStatus("下拉加载更多...");
                 //if (l<10) {
-                    //if (l==0) Materialize.toast("没有查询到数据!",3000);
+                if (l==0) $(".sethere").append("<div class=\"card white\"><div class=\"card-content white-text\"><span class=\"card-title\"></span><p>没有查询到信息！</p></div></div>");
                     //toggleStatus("没有更多了.");
                     //qSettings.full = true;
                 //}
-                for (var a in qldata){
-                    var qussum=qldata[a]['subject'];
-                    var qusid=qldata[a]['id'];
+                else{
+                  for (var a in qldata){
+                    var qussub=qldata[a]['subject'];
+                      var qussum=qldata[a]['content'];
+                      var qusid=qldata[a]['id'];
 
-                    var aclone=$(".cardtoclone:first").clone(true);
-                    var aaclone=$(aclone).attr("id","cardtoclone"+qusid);
-                    var aaa=$(aaclone).html("<div class=\"card-content white-text\"><span class=\"card-title\"><a href=\"question.php?id="+qusid+"\" class=\"\">您关注的问题有新动态，点击查看！</a></span><p>"+qussum+"</p></div><div class=\"card-action\"><a onclick=\"minus_xiaoxi("+qusid+")\">删除</a><div>");
-                  //  console.log(aaa);
-                    $(".sethere").append(aaa);
+                      var aclone=$(".cardtoclone:first").clone(true);
+                      var aaclone=$(aclone).attr("id","cardtoclone"+qusid);
+                      var aaa=$(aaclone).html("<div class=\"card-content white-text\"><span class=\"card-title\"><a href=\"question.php?id="+qusid+"\" class=\"\">您关注的问题有新动态，点击查看！</a></span><p>"+qussub+"</p></div><div class=\"card-action\"><a onclick=\"minus_xiaoxi("+qusid+")\">删除</a><div>");
+                    //  console.log(aaa);
+                      $(".sethere").append(aaa);
+                  }
                 }
                 //qSettings.start = 10;
                 //qSettings.prevSettings = sSettings;
@@ -80,6 +88,7 @@ session_start();
             } else {
                 //toggleStatus("加载失败，请重新搜索.");
             }
+            $('.card-action').hide();
         });
 
   })
@@ -92,6 +101,16 @@ session_start();
       $(function(){
          $(".button-collapse").sideNav();
       });
+ </script>
+  <script type="text/javascript">
+function showcaozuo(){
+  $('.card-action').show("slow");
+  $('#caozuobutton').html("<a class=\"btn-floating btn-large blue-grey lighten-3\" onclick=\"hidecaozuo()\">恢复</a>")
+}
+function hidecaozuo(){
+  $('.card-action').hide("slow");
+  $('#caozuobutton').html("<a class=\"btn-floating btn-large blue-grey lighten-3\" onclick=\"showcaozuo()\">操作</a>")
+}
  </script>
 </body>
 </html>

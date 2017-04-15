@@ -1,7 +1,9 @@
 <?php
-    session_start();
-//    include "assets/API/header_api_session.php";
- ?>
+session_start();
+//include "assets/API/header_api_session.php";
+?>
+
+
 <!DOCTYPE html>
 <html lang="zh-cn">
   <head>
@@ -24,6 +26,9 @@
         </div>
 
       </div>
+          <div class="fixed-action-btn horizontal click-to-toggle" id="caozuobutton">
+    <a class="btn-floating btn-large blue-grey lighten-3" onclick="showcaozuo()">操作</a>
+  </div>
 
     <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="assets/js/materialize.min.js"></script>
@@ -57,24 +62,27 @@
             var text = text_str;
             if (alertStatus(text['status'])){
                 var qldata=text['data'];
-                //var l=qldata.data.length;
+                var l=0;
+                for(var a in qldata){l++;}
                 //alert(l);
                 //toggleStatus("下拉加载更多...");
                 //if (l<10) {
-                    //if (l==0) Materialize.toast("没有查询到数据!",3000);
+                if (l==0) $(".sethere").append("<div class=\"card white\"><div class=\"card-content white-text\"><span class=\"card-title\"></span><p>没有查询到信息！</p></div></div>");
                     //toggleStatus("没有更多了.");
                     //qSettings.full = true;
                 //}
-                for (var a in qldata){
-                    var qussum=qldata[a]['content'];
-                    var qussub=qldata[a]['subject'];
-                    var qusid=qldata[a]['id'];
+                else{
+                    for (var a in qldata){
+                        var qussum=qldata[a]['content'];
+                        var qussub=qldata[a]['subject'];
+                        var qusid=qldata[a]['id'];
 
-                    var aclone=$(".cardtoclone:first").clone(true);
-                    var aaclone=$(aclone).attr("id","cardtoclone"+qusid);
-                    var aaa=$(aaclone).html("<div class=\"card-content white-text\"><span class=\"card-title\"><a href=\"question.php?id="+qusid+"\" class=\"\">"+qussub+"</a></span><p>"+qussum+"</p></div><div class=\"card-action\"><a href=\"#\" onclick=\"todelete("+qusid+")\">删除</a><a href=\"#modal"+qusid+"\" onclick=\"showmodal("+qusid+")\">分配任务</a><div id=\"modal"+qusid+"\" class=\"modal\"><div class=\"modal-content\"><h4></h4><div class=\"row\"><form class=\"col s12\"><div class=\"row\"><div class=\"input-field col s12\"><select id=\"department"+qusid+"\"><option value=\"\" disabled selected>请选择</option><option value=\"1\">学生事务部</option><option value=\"2\">教务部</option><option value=\"3\">安全保卫部</option><option value=\"4\">后勤保障部</option><option value=\"5\">宣传部</option><option value=\"6\">医务室</option><option value=\"7\">图书馆</option><option value=\"8\">管委会</option></select><label>选择分发至</label></div></div></form></div></div><div class=\"modal-footer\"><a href=\"#!\"  type=\"submit\"  name=\"action\" onclick=\"hidemodal("+qusid+")\"  class=\" modal-action modal-close waves-effect waves-green btn-flat\">提交</a></div></div>");
-                  //  console.log(aaa);
-                    $(".sethere").append(aaa);
+                        var aclone=$(".cardtoclone:first").clone(true);
+                        var aaclone=$(aclone).attr("id","cardtoclone"+qusid);
+                        var aaa=$(aaclone).html("<div class=\"card-content white-text\"><span class=\"card-title\"><a href=\"question.php?id="+qusid+"\" class=\"\">"+qussub+"</a></span><p>"+qussum+"</p></div><div class=\"card-action\"><a href=\"#\" onclick=\"todelete("+qusid+")\">删除</a><a href=\"#modal"+qusid+"\" onclick=\"showmodal("+qusid+")\">分配任务</a><div id=\"modal"+qusid+"\" class=\"modal\"><div class=\"modal-content\"><h4></h4><div class=\"row\"><form class=\"col s12\"><div class=\"row\"><div class=\"input-field col s12\"><select id=\"department"+qusid+"\"><option value=\"\" disabled selected>请选择</option><option value=\"1\">学生事务部</option><option value=\"2\">教务部</option><option value=\"3\">安全保卫部</option><option value=\"4\">后勤保障部</option><option value=\"5\">宣传部</option><option value=\"6\">医务室</option><option value=\"7\">图书馆</option><option value=\"8\">管委会</option></select><label>选择分发至</label></div></div></form></div></div><div class=\"modal-footer\"><a href=\"#!\"  type=\"submit\"  name=\"action\" onclick=\"hidemodal("+qusid+")\"  class=\" modal-action modal-close waves-effect waves-green btn-flat\">提交</a><a class=\" modal-action modal-close waves-effect waves-green btn-flat\"onclick=\"$('#modal"+qusid+"').modal('close');\">关闭</a></div></div>");
+                      //  console.log(aaa);
+                        $(".sethere").append(aaa);
+                    }
                 }
                 //qSettings.start = 10;
                 //qSettings.prevSettings = sSettings;
@@ -85,6 +93,7 @@
 
             $('.modal').modal();
             $('select').material_select();
+            $('.card-action').hide();
         });
     });
 
@@ -112,9 +121,9 @@
         var d="管委会";
     else
         Materialize.toast('未完成~~~', 3000, 'rounded');
-    if (q=='1'||q=='2'||q=='3'||q=='4'||q=='5'||q=='6'||q=='7'||q=='8')
+    if (q=='1'||q=='2'||q=='3'||q=='4'||q=='5'||q=='6'||q=='7'||q=='8'){
         Materialize.toast('提交成功！任务已分发至'+d+'~~~', 3000, 'rounded');
-    $('#cardtoclone'+b).hide("slow");
+       $('#cardtoclone'+b).hide("slow");}
     $('#modal'+b).modal('close');
 
     $.post("API/setProcessor.php",{id:b,processor:d},function(){});
@@ -128,7 +137,16 @@
          $(".button-collapse").sideNav();
       });
   </script>
-
+ <script type="text/javascript">
+function showcaozuo(){
+  $('.card-action').show("slow");
+  $('#caozuobutton').html("<a class=\"btn-floating btn-large blue-grey lighten-3\" onclick=\"hidecaozuo()\">恢复</a>")
+}
+function hidecaozuo(){
+  $('.card-action').hide("slow");
+  $('#caozuobutton').html("<a class=\"btn-floating btn-large blue-grey lighten-3\" onclick=\"showcaozuo()\">操作</a>")
+}
+ </script>
 
 </body>
 </html>

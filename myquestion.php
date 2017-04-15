@@ -3,6 +3,8 @@ session_start();
 //include "assets/API/header_api_session.php";
 ?>
 
+
+
 <!DOCTYPE html>
 <html lang="en">
  <head>
@@ -26,26 +28,10 @@ session_start();
         </div>
 
       </div>
-  <footer class="page-footer grey">
-   <div class="container">
-    <div class="row">
-     <div class="col l4 offset-l2 s12">
-      <h5 class="white-text">Links</h5>
-      <ul>
-       <li><a class="grey-text text-lighten-3" href="#!">使用说明</a></li>
-       <li><a class="grey-text text-lighten-3" href="#!">使用条款</a></li>
-       <li><a class="grey-text text-lighten-3" href="#!">意见反馈</a></li>
-      </ul>
-     </div>
-    </div>
-   </div>
-   <div class="footer-copyright">
-    <div class="container">
-      Copyright&copy; 北邮易班学生发展中心
-     <a class="grey-text text-lighten-3" href="http://buptyiban.org/">BUPTYiban</a>
-    </div>
-   </div>
-  </footer>
+         <div class="fixed-action-btn horizontal click-to-toggle" id="caozuobutton">
+    <a class="btn-floating btn-large blue-grey lighten-3" onclick="showcaozuo()">操作</a>
+  </div>
+
   <!--  Scripts-->
   <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="assets/js/new_materialize.js"></script>
@@ -84,24 +70,27 @@ session_start();
             var text = text_str;
             if (alertStatus(text['status'])){
                 var qldata=text['data'];
-                //var l=qldata.data.length;
+                var l=0;
+                for(var a in qldata){l++;}
                 //alert(l);
                 //toggleStatus("下拉加载更多...");
                 //if (l<10) {
-                    //if (l==0) Materialize.toast("没有查询到数据!",3000);
+                if (l==0) $(".sethere").append("<div class=\"card white\"><div class=\"card-content white-text\"><span class=\"card-title\"></span><p>没有查询到信息！</p></div></div>");
                     //toggleStatus("没有更多了.");
                     //qSettings.full = true;
                 //}
-                for (var a in qldata){
-                    var qussub=qldata[a]['subject'];
-                    var qussum=qldata[a]['content'];
-                    var qusid=qldata[a]['id'];
+                else{
+                    for (var a in qldata){
+                        var qussub=qldata[a]['subject'];
+                        var qussum=qldata[a]['content'];
+                        var qusid=qldata[a]['id'];
 
-                    var aclone=$(".cardtoclone:first").clone(true);
-                    var aaclone=$(aclone).attr("id","cardtoclone"+qusid);
-                    var aaa=$(aaclone).html("<div class=\"card-content white-text\"><span class=\"card-title\"><a href=\"question.php?id="+qusid+"\" class=\"\">"+qussub+"</a></span><p>"+qussum+"</p></div><div class=\"card-action\"><a onclick=\"minus_answered_question("+qusid+")\">删除</a><div>");
-                  //  console.log(aaa);
-                    $(".sethere").append(aaa);
+                        var aclone=$(".cardtoclone:first").clone(true);
+                        var aaclone=$(aclone).attr("id","cardtoclone"+qusid);
+                        var aaa=$(aaclone).html("<div class=\"card-content white-text\"><span class=\"card-title\"><a href=\"question.php?id="+qusid+"\" class=\"\">"+qussub+"</a></span><p>"+qussum+"</p></div><div class=\"card-action\"><a onclick=\"minus_answered_question("+qusid+")\">删除</a><div>");
+                      //  console.log(aaa);
+                        $(".sethere").append(aaa);
+                    }
                 }
                 //qSettings.start = 10;
                 //qSettings.prevSettings = sSettings;
@@ -109,6 +98,7 @@ session_start();
             } else {
                 //toggleStatus("加载失败，请重新搜索.");
             }
+            $('.card-action').hide();
         });
   });
 
@@ -120,6 +110,16 @@ session_start();
 $(function(){
          $(".button-collapse").sideNav();
       });
+ </script>
+  <script type="text/javascript">
+function showcaozuo(){
+  $('.card-action').show("slow");
+  $('#caozuobutton').html("<a class=\"btn-floating btn-large blue-grey lighten-3\" onclick=\"hidecaozuo()\">恢复</a>")
+}
+function hidecaozuo(){
+  $('.card-action').hide("slow");
+  $('#caozuobutton').html("<a class=\"btn-floating btn-large blue-grey lighten-3\" onclick=\"showcaozuo()\">操作</a>")
+}
  </script>
   </body>
 

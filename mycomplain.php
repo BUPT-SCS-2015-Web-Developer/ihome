@@ -43,6 +43,9 @@ session_start();
       </div>
       </div>
     </div>
+    <div class="fixed-action-btn horizontal click-to-toggle" id="caozuobutton">
+    <a class="btn-floating btn-large blue-grey lighten-3" onclick="showcaozuo()">操作</a>
+  </div>
 </div>
 
   <!--  Scripts-->
@@ -86,35 +89,42 @@ session_start();
             var text = text_str;
             if (alertStatus(text['status'])){
                 var qldata=text['data'];
-                //var l=qldata.data.length;
+                var l=0;
+                for(var a in qldata){l++;}
                 //alert(l);
                 //toggleStatus("下拉加载更多...");
                 //if (l<10) {
-                    //if (l==0) Materialize.toast("没有查询到数据!",3000);
+                if (l==0) {
+                  $(".sethere1").append("<div class=\"card white\"><div class=\"card-content white-text\"><span class=\"card-title\"></span><p>没有查询到信息！</p></div></div>");
+                  $(".sethere2").append("<div class=\"card white\"><div class=\"card-content white-text\"><span class=\"card-title\"></span><p>没有查询到信息！</p></div></div>");
+              }
                     //toggleStatus("没有更多了.");
                     //qSettings.full = true;
                 //}
-                for (var a in qldata){
-                    var qussum=qldata[a]['content'];
-                    var qusid=qldata[a]['id'];
-                    var quspro=qldata[a]['progress'];
-                    var type=qldata[a]['listType'];
+                else{
+                  for (var a in qldata){
+                      var qussub=qldata[a]['subject'];
+                      var qussum=qldata[a]['content'];
+                      var qusid=qldata[a]['id'];
+                      var quspro=qldata[a]['progress'];
+                      var type=qldata[a]['type'];
 
-                    if(type=="solved"){
+                      if(type=="1"){
 
-                    var aclone=$(".acardtoclone:first").clone(true);
-                    var aaclone=$(aclone).attr("id","acardtoclone"+qusid);
-                    var aaa=$(aaclone).html("<div class=\"card-content white-text\"><span class=\"card-title\"><a href=\"question.php?id="+qusid+"\" class=\"\">"+qussum+"</a></span><p>"+qussum+"</p></div><div class=\"card-action\"><a href=\"#\" onclick=\"minus_answered_question("+qusid+")\">删除</a><a href=\"#modal"+qusid+"\" onclick=\"showmodel("+qusid+")\" id=\"comment"+qusid+"\">去评价</a><div id=\"modal"+qusid+"\" class=\"modal\"><div class=\"modal-content\"><h4></h4><div class=\"row\"><form class=\"col s12\"><div class=\"row\"><div class=\"input-field col s12\"><select id=\"attitude"+qusid+"\"> <option value=\"\" disabled selected>请选择</option><option value=\"1\">1</option><option value=\"2\">2</option><option value=\"3\">3</option><option value=\"4\">4</option><option value=\"5\">5</option></select><label>服务态度</label></div><div class=\"input-field col s12\"><select id=\"result"+qusid+"\"><option value=\"\" disabled selected>请选择</option><option value=\"1\">1</option><option value=\"2\">2</option><option value=\"3\">3</option><option value=\"4\">4</option><option value=\"5\">5</option></select><label>处理结果</label></div><div class=\"input-field col s12\"><select id=\"efficiency"+qusid+"\"><option value=\"\" disabled selected>请选择</option><option value=\"1\">1</option><option value=\"2\">2</option><option value=\"3\">3</option><option value=\"4\">4</option><option value=\"5\">5</option></select><label>办理效率</label></div><div class=\"input-field col s12\"><select id=\"all_in_all"+qusid+"\"><option value=\"\" disabled selected>请选择</option><option value=\"1\">1</option><option value=\"2\">2</option><option value=\"3\">3</option><option value=\"4\">4</option><option value=\"5\">5</option></select><label>总体满意度</label></div><div class=\"input-field col s12\"><textarea id=\"description"+qusid+"\" class=\"materialize-textarea\"></textarea><label for=\"textarea1\">文字评价</label></div></div></form></div></div><div class=\"modal-footer\"><a href=\"#!\"  type=\"submit\"  name=\"action\" onclick=\"hidemodel("+qusid+")\"  class=\" modal-action modal-close waves-effect waves-green btn-flat\">提交</a></div></div>");
-                  //  console.log(aaa);
-                    $(".sethere1").append(aaa);}
+                      var aclone=$(".acardtoclone:first").clone(true);
+                      var aaclone=$(aclone).attr("id","acardtoclone"+qusid);
+                      var aaa=$(aaclone).html("<div class=\"card-content white-text\"><span class=\"card-title\"><a href=\"question.php?id="+qusid+"\" class=\"\">"+qussub+"</a></span><p>"+qussum+"</p></div><div class=\"card-action\"><a href=\"#\" onclick=\"minus_answered_question("+qusid+")\">删除</a><a href=\"#modal"+qusid+"\" onclick=\"showmodel("+qusid+")\" id=\"comment"+qusid+"\">去评价</a><div id=\"modal"+qusid+"\" class=\"modal\"><div class=\"modal-content\"><h4></h4><div class=\"row\"><form class=\"col s12\"><div class=\"row\"><div class=\"input-field col s12\"><select id=\"attitude"+qusid+"\"> <option value=\"\" disabled selected>请选择</option><option value=\"1\">1</option><option value=\"2\">2</option><option value=\"3\">3</option><option value=\"4\">4</option><option value=\"5\">5</option></select><label>服务态度</label></div><div class=\"input-field col s12\"><select id=\"result"+qusid+"\"><option value=\"\" disabled selected>请选择</option><option value=\"1\">1</option><option value=\"2\">2</option><option value=\"3\">3</option><option value=\"4\">4</option><option value=\"5\">5</option></select><label>处理结果</label></div><div class=\"input-field col s12\"><select id=\"efficiency"+qusid+"\"><option value=\"\" disabled selected>请选择</option><option value=\"1\">1</option><option value=\"2\">2</option><option value=\"3\">3</option><option value=\"4\">4</option><option value=\"5\">5</option></select><label>办理效率</label></div><div class=\"input-field col s12\"><select id=\"all_in_all"+qusid+"\"><option value=\"\" disabled selected>请选择</option><option value=\"1\">1</option><option value=\"2\">2</option><option value=\"3\">3</option><option value=\"4\">4</option><option value=\"5\">5</option></select><label>总体满意度</label></div><div class=\"input-field col s12\"><textarea id=\"description"+qusid+"\" class=\"materialize-textarea\"></textarea><label for=\"textarea1\">文字评价</label></div></div></form></div></div><div class=\"modal-footer\"><a href=\"#!\"  type=\"submit\"  name=\"action\" onclick=\"hidemodel("+qusid+")\"  class=\" modal-action modal-close waves-effect waves-green btn-flat\">提交</a><a class=\" modal-action modal-close waves-effect waves-green btn-flat\"onclick=\"$('#modal"+qusid+"').modal('close');\">关闭</a></div></div>");
+                    //  console.log(aaa);
+                      $(".sethere1").append(aaa);}
 
-                    else if(type=="unsolved"){
+                      else if(type=="2"){
 
-                    var bclone=$(".bcardtoclone:first").clone(true);
-                    var bbclone=$(bclone).attr("id","bcardtoclone"+qusid);
-                    var bbb=$(bbclone).html("<div class=\"card-content white-text\"><span class=\"card-title\"><a href=\"question.php?id="+qusid+"\" class=\"\">"+qussum+"</a></span><p>"+qussum+"</p></div><div class=\"card-action\"><a>"+quspro+"<a><a onclick=\"minus_notanswer_question("+qusid+")\">删除</a><a onclick=\"toast("+qusid+")\" >催办</a><div> ");
-                  //  console.log(aaa);
-                    $(".sethere2").append(bbb);}
+                      var bclone=$(".bcardtoclone:first").clone(true);
+                      var bbclone=$(bclone).attr("id","bcardtoclone"+qusid);
+                      var bbb=$(bbclone).html("<div class=\"card-content white-text\"><span class=\"card-title\"><a href=\"question.php?id="+qusid+"\" class=\"\">"+qussub+"</a></span><p>"+qussum+"</p></div><div class=\"card-action\"><a>"+quspro+"<a><a onclick=\"minus_notanswer_question("+qusid+")\">删除</a><a onclick=\"toast("+qusid+")\" >催办</a><div> ");
+                    //  console.log(aaa);
+                      $(".sethere2").append(bbb);}
+                  }
                 }
                 //qSettings.start = 10;
                 //qSettings.prevSettings = sSettings;
@@ -126,6 +136,7 @@ session_start();
   $('.modal').modal();
   $('.tooltipped').tooltip({delay: 50});
     $('select').material_select();
+    $('.card-action').hide();
         });
 
 
@@ -143,29 +154,32 @@ session_start();
   }
    function hidemodel(b){
     //调试用
-    /*var q1=$("#attitude").val();
-    var q2=$("#result").val();
-    var q3=$("#efficiency").val();
-    var q4=$("#all_in_all").val();
-    var q5=$("#description").val();
-    alert(q1+q2+q3+q4+q5);*/
+    var q1=$("#attitude"+b).val();
+    var q2=$("#result"+b).val();
+    var q3=$("#efficiency"+b).val();
+    var q4=$("#all_in_all"+b).val();
+    var q5=$("#description"+b).val();
+   // alert(q1);
+    if (q1==null||q2==null||q3==null||q4==null) Materialize.toast('您的评价不全哦~~~', 3000, 'rounded');
 
     //向后端发数据，正式用
-    $.post("API/appraise.php",
-  {
-    id:b,
-    attitude:$("#attitude"+b).val(),
-    result:$("#result"+b).val(),
-    efficiency:$("#efficiency"+b).val(),
-    all_in_all:$("#all_in_all"+b).val(),
-    description:$("#description"+b).val()
-  },function(){});
-    Materialize.toast('提交成功！感谢您的评价~~~', 3000, 'rounded');
-    $b=b;
-    $('#modal'+b).modal('close');
-    $('#comment'+b).removeAttr("onclick");
-    $('#comment'+b).removeAttr("href");
-    $('#comment'+b).html("已评价");
+    else{
+        $.post("API/appraise.php",
+      {
+        id:b,
+        attitude:$("#attitude"+b).val(),
+        result:$("#result"+b).val(),
+        efficiency:$("#efficiency"+b).val(),
+        all_in_all:$("#all_in_all"+b).val(),
+        description:$("#description"+b).val()
+      },function(){});
+        Materialize.toast('提交成功！感谢您的评价~~~', 3000, 'rounded');
+        $b=b;
+        $('#modal'+b).modal('close');
+        $('#comment'+b).removeAttr("onclick");
+        $('#comment'+b).removeAttr("href");
+        $('#comment'+b).html("已评价");
+    }
   }
   </script>
 
@@ -184,6 +198,17 @@ session_start();
       $(function(){
          $(".button-collapse").sideNav();
       });
+ </script>
+
+ <script type="text/javascript">
+function showcaozuo(){
+  $('.card-action').show("slow");
+  $('#caozuobutton').html("<a class=\"btn-floating btn-large blue-grey lighten-3\" onclick=\"hidecaozuo()\">恢复</a>")
+}
+function hidecaozuo(){
+  $('.card-action').hide("slow");
+  $('#caozuobutton').html("<a class=\"btn-floating btn-large blue-grey lighten-3\" onclick=\"showcaozuo()\">操作</a>")
+}
  </script>
   </body>
 </html>
