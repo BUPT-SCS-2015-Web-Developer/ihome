@@ -1,4 +1,6 @@
 <?php
+    session_start();
+    //include "assets/API/header_api_session.php";
 
     session_start();
     if(!array_key_exists('school_id', $_SESSION))
@@ -103,7 +105,7 @@
             if ($res['data']['is_reply']==1) { ?>
         <h5><?php echo $res['data']['processor']; ?>的回复:</h5>
         <p><?php echo $res['data']['reply']; ?></p>
-        <?php } else { ?> 
+        <?php } else { ?>
         <h5><?php echo $res['data']['progress']; ?></h5>
         <?php } echo "<hr>"; }?>
         <pre><?php echo $res['data']['content'];?></pre>

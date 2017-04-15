@@ -1,11 +1,6 @@
 <?php
-    /*session_start();
-  if(!isset($_SESSION['id'])){
-    exit('非法访问！');
-  }
-  else{
-    $user=$_SESSION['id'];
-  }*/
+session_start();
+//include "assets/API/header_api_session.php";
 ?>
 
 <!DOCTYPE html>
@@ -70,7 +65,7 @@
             errormsg['login first']="请先登录!";
             errormsg['failed']="该条目可能已经被删除!";
             errormsg['parameter error']="参数错误";
-            
+
         var alertStatus = function(type) {
                 if (type=="success") return true;
                 try {
@@ -81,7 +76,7 @@
                 return false;
             }
 
-           $.post("api/mylist.php",{
+           $.post("API/mylist.php",{
             //mylist
             search:'',
             type:'2',
@@ -112,7 +107,7 @@
                     var aaa=$(aaclone).html("<div class=\"card-content white-text\"><span class=\"card-title\"><a href=\"question.php?id="+qusid+"\" class=\"\">"+qussum+"</a></span><p>"+qussum+"</p></div><div class=\"card-action\"><a href=\"#\" onclick=\"minus_answered_question("+qusid+")\">删除</a><a href=\"#modal"+qusid+"\" onclick=\"showmodel("+qusid+")\" id=\"comment"+qusid+"\">去评价</a><div id=\"modal"+qusid+"\" class=\"modal\"><div class=\"modal-content\"><h4></h4><div class=\"row\"><form class=\"col s12\"><div class=\"row\"><div class=\"input-field col s12\"><select id=\"attitude"+qusid+"\"> <option value=\"\" disabled selected>请选择</option><option value=\"1\">1</option><option value=\"2\">2</option><option value=\"3\">3</option><option value=\"4\">4</option><option value=\"5\">5</option></select><label>服务态度</label></div><div class=\"input-field col s12\"><select id=\"result"+qusid+"\"><option value=\"\" disabled selected>请选择</option><option value=\"1\">1</option><option value=\"2\">2</option><option value=\"3\">3</option><option value=\"4\">4</option><option value=\"5\">5</option></select><label>处理结果</label></div><div class=\"input-field col s12\"><select id=\"efficiency"+qusid+"\"><option value=\"\" disabled selected>请选择</option><option value=\"1\">1</option><option value=\"2\">2</option><option value=\"3\">3</option><option value=\"4\">4</option><option value=\"5\">5</option></select><label>办理效率</label></div><div class=\"input-field col s12\"><select id=\"all_in_all"+qusid+"\"><option value=\"\" disabled selected>请选择</option><option value=\"1\">1</option><option value=\"2\">2</option><option value=\"3\">3</option><option value=\"4\">4</option><option value=\"5\">5</option></select><label>总体满意度</label></div><div class=\"input-field col s12\"><textarea id=\"description"+qusid+"\" class=\"materialize-textarea\"></textarea><label for=\"textarea1\">文字评价</label></div></div></form></div></div><div class=\"modal-footer\"><a href=\"#!\"  type=\"submit\"  name=\"action\" onclick=\"hidemodel("+qusid+")\"  class=\" modal-action modal-close waves-effect waves-green btn-flat\">提交</a></div></div>");
                   //  console.log(aaa);
                     $(".sethere1").append(aaa);}
-                    
+
                     else if(type=="unsolved"){
 
                     var bclone=$(".bcardtoclone:first").clone(true);
@@ -120,12 +115,12 @@
                     var bbb=$(bbclone).html("<div class=\"card-content white-text\"><span class=\"card-title\"><a href=\"question.php?id="+qusid+"\" class=\"\">"+qussum+"</a></span><p>"+qussum+"</p></div><div class=\"card-action\"><a>"+quspro+"<a><a onclick=\"minus_notanswer_question("+qusid+")\">删除</a><a onclick=\"toast("+qusid+")\" >催办</a><div> ");
                   //  console.log(aaa);
                     $(".sethere2").append(bbb);}
-                }         
+                }
                 //qSettings.start = 10;
                 //qSettings.prevSettings = sSettings;
                 //qSettings.prevSettings.start0 = 10;
             } else {
-                //toggleStatus("加载失败，请重新搜索.");          
+                //toggleStatus("加载失败，请重新搜索.");
             }
 
   $('.modal').modal();
@@ -133,12 +128,12 @@
     $('select').material_select();
         });
 
- 
+
   });
 
   function toast(b){
     Materialize.toast('催办成功！请耐心等待哟~~~', 3000, 'rounded');
-    $.post("api/urge.php",{id:b},function(){});
+    $.post("API/urge.php",{id:b},function(){});
 
   }
 
@@ -156,8 +151,8 @@
     alert(q1+q2+q3+q4+q5);*/
 
     //向后端发数据，正式用
-    $.post("api/appraise.php",
-  { 
+    $.post("API/appraise.php",
+  {
     id:b,
     attitude:$("#attitude"+b).val(),
     result:$("#result"+b).val(),
@@ -178,16 +173,16 @@
    function minus_answered_question(a){
     $a=a;
     $('#acardtoclone'+a).hide("slow");
-    $.post("api/deletequestion.php",{id:a},function(){});
+    $.post("API/deletequestion.php",{id:a},function(){});
    }
 
     function minus_notanswer_question(a){
     $a=a;
     $('#bcardtoclone'+a).hide("slow");
-    $.post("api/deletequestion.php",{id:a},function(){});
+    $.post("API/deletequestion.php",{id:a},function(){});
    }
       $(function(){
-         $(".button-collapse").sideNav(); 
+         $(".button-collapse").sideNav();
       });
  </script>
   </body>

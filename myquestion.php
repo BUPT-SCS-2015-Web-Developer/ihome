@@ -1,11 +1,6 @@
 <?php
-    /*session_start();
-  if(!isset($_SESSION['id'])){
-    exit('非法访问！');
-  }
-  else{
-    $user=$_SESSION['id'];
-  }*/
+session_start();
+//include "assets/API/header_api_session.php";
 ?>
 
 <!DOCTYPE html>
@@ -79,7 +74,7 @@
                 }
                 return false;
             }
-       $.post("api/mylist.php",{
+       $.post("API/mylist.php",{
         //mylist
            text:"",
            type:"1",
@@ -107,12 +102,12 @@
                     var aaa=$(aaclone).html("<div class=\"card-content white-text\"><span class=\"card-title\"><a href=\"question.php?id="+qusid+"\" class=\"\">"+qussub+"</a></span><p>"+qussum+"</p></div><div class=\"card-action\"><a onclick=\"minus_answered_question("+qusid+")\">删除</a><div>");
                   //  console.log(aaa);
                     $(".sethere").append(aaa);
-                }         
+                }
                 //qSettings.start = 10;
                 //qSettings.prevSettings = sSettings;
                 //qSettings.prevSettings.start0 = 10;
             } else {
-                //toggleStatus("加载失败，请重新搜索.");          
+                //toggleStatus("加载失败，请重新搜索.");
             }
         });
   });
@@ -123,7 +118,7 @@
     $.post("API/deletequestion.php",{id:a},function(){});
    }
 $(function(){
-         $(".button-collapse").sideNav(); 
+         $(".button-collapse").sideNav();
       });
  </script>
   </body>

@@ -1,8 +1,7 @@
 <?php
 //Environment settings
-$iapp_id = 'iapp86269'; //Eg. iapp40000
-$iapp_bupt_url = 'http://activity.buptyiban.org/index.php'; //Eg. http://yiban.bupt.edu.cn/askforleave/leave.php
-
+$iapp_id = 'iapp109635'; //Eg. iapp40000
+$iapp_bupt_url = 'http://ihome.buptyiban.org/index.php'; //Eg. http://yiban.bupt.edu.cn/askforleave/leave.php
 //Program
 //Set SESSION Cookie's expire time and path before session_start()
 /*
@@ -49,3 +48,4 @@ debug_to_console(substr(
     (strpos(getcwd(),'/',strpos(getcwd(),'html')+5) ? strpos(getcwd(),'/',strpos(getcwd(),'html')+5) - (strpos(getcwd(),'html')+5) : 100)
 ));
 //*/
+include "assets/API/iapp.php";

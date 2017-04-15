@@ -12,15 +12,18 @@
 
     if(!array_key_exists('school_id', $_SESSION))
         exit(json_encode(array('status'=>'login first')));
+
     $type = $_SESSION['type'];
-    //2为问题反馈
-    $sql_query = "SELECT * FROM `ihome_question` WHERE `type` = '2' and `processor` = '".$type."'";
+    if($type == 'admin')
+        $sql_query = "SELECT * FROM `ihome_question` WHERE `type` = '2'";
+    else
+        $sql_query = "SELECT * FROM `ihome_question` WHERE `type` = '2' and `processor` = '".$type."'";
 
     $result = $db->query($sql_query);
     $res = array('status' => 'success','data' => array());
 
     if($result == True)
-        if($result->= != 0)
+        if($result->num_rows != 0)
         {
             foreach ($result as $row => $value) {
                 $res['data'][] = $value;
@@ -34,5 +37,4 @@
             }
         }
     echo json_encode($res);
-
  ?>

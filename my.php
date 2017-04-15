@@ -1,11 +1,6 @@
 <?php
-    /*session_start();
-  if(!isset($_SESSION['id'])){
-    exit('非法访问！');
-  }
-  else{
-    $user=$_SESSION['id'];
-  }*/
+session_start();
+//include "assets/API/header_api_session.php";
 ?>
 
 <!DOCTYPE html>

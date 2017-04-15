@@ -1,11 +1,6 @@
 <?php
-    /*session_start();
-  if(!isset($_SESSION['id'])){
-    exit('非法访问！');
-  }
-  else{
-    $user=$_SESSION['id'];
-  }*/
+session_start();
+//include "assets/API/header_api_session.php";
 ?>
 
 <!DOCTYPE html>
@@ -34,7 +29,7 @@
         </div>
 
       </div>
- 
+
   <!--  Scripts-->
   <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="assets/js/materialize.min.js"></script>
@@ -45,7 +40,7 @@
             errormsg['login first']="请先登录!";
             errormsg['failed']="该条目可能已经被删除!";
             errormsg['parameter error']="参数错误";
-            
+
         var alertStatus = function(type) {
                 if (type=="success") return true;
                 try {
@@ -55,7 +50,7 @@
                 }
                 return false;
             }
-             $.post("api/followlist.php",{
+             $.post("API/followlist.php",{
               //followlist
             search:'',
             type:'',
@@ -75,17 +70,17 @@
                     var aaa=$(aaclone).html("<div class=\"card-content white-text\"><span class=\"card-title\"><a href=\"question.php?id="+qusid+"\" class=\"\">"+qussub+"</a></span><p>"+qussum+"</p></div><div id=\"heart"+qusid+"\" class=\"card-action\"><a onclick=\"minus_guanzhu("+qusid+")\"><img src=\"assets/img/ic_thanked.png\" alt=\"取消关注\"></a></div>");
                   //  console.log(aaa);
                     $(".sethere").append(aaa);
-                }         
+                }
                 //qSettings.start = 10;
                 //qSettings.prevSettings = sSettings;
                 //qSettings.prevSettings.start0 = 10;
             } else {
-                //toggleStatus("加载失败，请重新搜索.");          
+                //toggleStatus("加载失败，请重新搜索.");
             }
         });
-      
+
       $(function(){
-         $(".button-collapse").sideNav(); 
+         $(".button-collapse").sideNav();
       });
   </script>
 
@@ -100,7 +95,6 @@
     $('#heart'+a).html("<a onclick=\"minus_guanzhu("+a+")\"><img src=\"assets/img/ic_thanked.png\" alt=\"取消关注\"></a>");
     $.post("API/praise.php",{id:a,type:"follow"},function(){});
    }
- </script> 
+ </script>
 </body>
 </html>
-

@@ -1,7 +1,9 @@
-<?php 
-
-
-
+<?php
+ini_set("display_errors", "On");
+error_reporting(E_ALL | E_STRICT);
+session_start();
+//include "assets/API/header_api_session.php";
+include "API/login.php";
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +21,7 @@
 </head>
 
 <body>
-    <?php include("header.php"); ?>
+    <?php include "header.php"; ?>
 
     <div class="searchBox container white box">
         <div class="row a1">
@@ -42,7 +44,7 @@
          </div>
         </div>
     </div>
-    
+
     <div class="quesBox container box white">
         <div id="quesHeader">
             <div id="typeBox">
@@ -58,7 +60,7 @@
         <div id="moreBox">
             <p id="moreText">下拉加载更多...</p>
         </div>
-    
+
     </div>
     <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="assets/js/materialize.js"></script>
@@ -69,9 +71,9 @@
     <script>
         window.hotSubject = {};
 <?php
-    
-    
-?>  
+
+
+?>
     </script>
     <script src="assets/js/index.js"></script>
 </body>

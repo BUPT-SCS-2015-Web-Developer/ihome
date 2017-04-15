@@ -1,7 +1,6 @@
-<?php 
-
-
-
+<?php
+session_start();
+//include "assets/API/header_api_session.php";
 ?>
 <!DOCTYPE html>
 <html lang="zh-cn">
@@ -60,8 +59,8 @@
             <p>问题提交成功！你可以<a href="index.php">返回主页</a>或<a id="morelink" href="#">查看该问题详情</a></p>
         </div>
     </div>
-    
-  
+
+
     <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="assets/js/materialize.js"></script>
     <script src="assets/js/new.js"></script>

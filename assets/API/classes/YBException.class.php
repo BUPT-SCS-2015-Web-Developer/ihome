@@ -4,8 +4,7 @@
 	 *
 	 *
 	 */
-	class YBException extends Exception
-	{
+	class YBException extends Exception{
 		
 	}
 

@@ -1,9 +1,6 @@
 <?php
     session_start();
-    $_SESSION['school_id'] = '2015211314';
-    $_SESSION['yiban_id'] = '456';
-    $_SESSION['type'] = 'admin';
-    $_SESSION['name'] = '管理员的昵称';
+//    include "assets/API/header_api_session.php";
  ?>
 <!DOCTYPE html>
 <html lang="zh-cn">
@@ -16,16 +13,7 @@
 </head>
 
 <body>
-    <header>
-        <nav class="white" role="navigation">
-            <div class="nav-wrapper container hide-on-med-and-down">
-                <a href="index.php" class="brand-logo">爱沙河</a>
-                <ul class="right">
-                </ul>
-            </div>
-
-        </nav>
-    </header>
+    <?php include "header.php"; ?>
 
         <div class="quesBox container">
 
@@ -49,7 +37,7 @@
             errormsg['login first']="请先登录!";
             errormsg['failed']="该条目可能已经被删除!";
             errormsg['parameter error']="参数错误";
-        
+
         var alertStatus = function(type) {
                 if (type=="success") return true;
                 try {
@@ -60,7 +48,7 @@
                 return false;
             }
 
-       $.post("api/adminlist.php",{
+       $.post("API/adminlist.php",{
         //adminlist
         },function(text_str){
             var text = text_str;
@@ -83,12 +71,12 @@
                     var aaa=$(aaclone).html("<div class=\"card-content white-text\"><span class=\"card-title\"><a href=\"question.php?id="+qusid+"\" class=\"\">"+qussum+"</a></span><p>"+qussum+"</p></div><div class=\"card-action\"><a href=\"#modal"+qusid+"\" onclick=\"showmodal("+qusid+")\">回复</a><div id=\"modal"+qusid+"\" class=\"modal\"><div class=\"modal-content\"><h4></h4><div class=\"row\"><form class=\"col s12\"><div class=\"row\"><div class=\"input-field col s12\"><textarea id=\"textarea"+qusid+"\" class=\"materialize-textarea\"></textarea><label for=\"textarea1\">请在此输入回复内容</label></div></div></form></div></div><div class=\"modal-footer\"><a href=\"#!\"  type=\"submit\"  name=\"action\" onclick=\"hidemodal("+qusid+")\"  class=\" modal-action modal-close waves-effect waves-green btn-flat\">提交</a></div></div>");
                   //  console.log(aaa);
                     $(".sethere").append(aaa);
-                }         
+                }
                 //qSettings.start = 10;
                 //qSettings.prevSettings = sSettings;
                 //qSettings.prevSettings.start0 = 10;
             } else {
-                //toggleStatus("加载失败，请重新搜索.");          
+                //toggleStatus("加载失败，请重新搜索.");
             }
 
             $('.modal').modal();
@@ -105,7 +93,7 @@
         Materialize.toast('回复成功！', 3000, 'rounded');
     //$b=b;
     $('#modal'+b).modal('close');
-    $.post("api/reply.php",{id:b,reply:q},function(){});
+    $.post("API/reply.php",{id:b,reply:q},function(){});
   }
     function todelete(b){
     //$b=b;
@@ -113,10 +101,10 @@
     //$.post("api/deletequestion.php",{id:b},function(){});
   }
           $(function(){
-         $(".button-collapse").sideNav(); 
+         $(".button-collapse").sideNav();
       });
   </script>
 
-    
+
 </body>
 </html>
