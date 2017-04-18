@@ -80,7 +80,7 @@ session_start();
 
                       var aclone=$(".cardtoclone:first").clone(true);
                       var aaclone=$(aclone).attr("id","cardtoclone"+qusid);
-                      var aaa=$(aaclone).html("<div class=\"card-content white-text\"><span class=\"card-title\"><a href=\"question.php?id="+qusid+"\" class=\"\">"+qussub+"</a></span><p>"+qussum+"</p></div><div id=\"heart"+qusid+"\" class=\"card-action\"><a onclick=\"minus_guanzhu("+qusid+")\"><img src=\"assets/img/ic_thanked.png\" alt=\"取消关注\"></a></div>");
+                      var aaa=$(aaclone).html("<div class=\"card-content white-text\"><span class=\"card-title\"><a href=\"question.php?id="+qusid+"\" class=\"\">"+qussub+"</a></span><p>"+qussum+"</p></div><div id=\"heart"+qusid+"\" class=\"card-action\"><a onclick=\"minus_guanzhu("+qusid+")\">取消关注<i class=\"material-icons\">visibility</i></a></div>");
                     //  console.log(aaa);
                       $(".sethere").append(aaa);
                   }
@@ -102,12 +102,12 @@ session_start();
  <script type="text/javascript">
    function minus_guanzhu(a){
     $a=a;
-    $('#heart'+a).html("<a onclick=\"add_guanzhu("+a+")\"><img src=\"assets/img/ic_thank.png\" alt=\"关注\"></a>");
+    $('#heart'+a).html("<a onclick=\"add_guanzhu("+a+")\">取消关注<i class=\"material-icons\">visibility</i></a>");
     $.post("API/praise.php",{id:a,type:"follow"},function(){});
    }
     function add_guanzhu(a){
     $a=a;
-    $('#heart'+a).html("<a onclick=\"minus_guanzhu("+a+")\"><img src=\"assets/img/ic_thanked.png\" alt=\"取消关注\"></a>");
+    $('#heart'+a).html("<a onclick=\"minus_guanzhu("+a+")\">关注<i class=\"material-icons\">visibility_off</i></a>");
     $.post("API/praise.php",{id:a,type:"follow"},function(){});
    }
  </script>

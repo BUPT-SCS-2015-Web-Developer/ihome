@@ -18,6 +18,9 @@ session_start();
  </head>
  <body>
   <?php include("header.php"); ?>
+  <div class="container">
+        <h5>我提问的问题</h5>
+      </div>
        <div class="quesBox container">
 
         <div class="row">
