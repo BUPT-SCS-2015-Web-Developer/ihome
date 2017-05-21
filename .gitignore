@@ -8,8 +8,3 @@ assets/API/classes/db_configs.php
 assets/API/config.php
 
 API/db_config.php
-*.sql
-API/db_config.php
-API/db_config.php
-API/login.php
-assets/API/header_api_session.php

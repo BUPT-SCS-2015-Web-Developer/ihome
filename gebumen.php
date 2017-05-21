@@ -15,7 +15,6 @@ include_once "API/head.php";
 </head>
 
 <body>
-
 <?php include "header.php"; ?>
 
 <div class="quesBox container">
@@ -31,7 +30,6 @@ include_once "API/head.php";
 <div class="fixed-action-btn horizontal click-to-toggle" id="caozuobutton">
   <a class="btn-floating btn-large blue-grey lighten-3" onclick="showcaozuo()">操作</a>
 </div>
-
 
 
 <script src="assets/js/jquery-3.2.1.min.js"></script>

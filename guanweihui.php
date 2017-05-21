@@ -82,7 +82,6 @@ include_once "API/head.php";
                         var aaclone = $(aclone).attr("id", "cardtoclone" + qusid);
                         var aaa = $(aaclone).html("<div class=\"card-content white-text\"><span class=\"card-title\"><a href=\"question.php?id=" + qusid + "\" class=\"\">" + qussub + "</a></span><p>" + qussum + "</p></div><div class=\"card-action\"><a href=\"#\" onclick=\"todelete(" + qusid + ")\">删除</a><a href=\"#modal" + qusid + "\" onclick=\"showmodal(" + qusid + ")\">分配任务</a><div id=\"modal" + qusid + "\" class=\"modal\"><div class=\"modal-content\"><h4></h4><div class=\"row\"><form class=\"col s12\"><div class=\"row\"><div class=\"input-field col s12\"><select id=\"department" + qusid + "\"><option value=\"\" disabled selected>请选择</option><option value=\"1\">学生事务部</option><option value=\"2\">教务部</option><option value=\"3\">安全保卫部</option><option value=\"4\">后勤保障部</option><option value=\"5\">宣传部</option><option value=\"6\">医务室</option><option value=\"7\">图书馆</option><option value=\"8\">管委会</option></select><label>选择分发至</label></div></div></form></div></div><div class=\"modal-footer\"><a href=\"#!\"  type=\"submit\"  name=\"action\" onclick=\"hidemodal(" + qusid + ")\"  class=\" modal-action modal-close waves-effect waves-green btn-flat\">提交</a><a class=\" modal-action modal-close waves-effect waves-green btn-flat\"onclick=\"$('#modal" + qusid + "').modal('close');\">关闭</a></div></div>");
                         //  console.log(aaa);
-
                         $(".sethere").append(aaa);
                     }
                 }
@@ -98,7 +97,6 @@ include_once "API/head.php";
             $('.card-action').hide();
         });
     });
-
 
     function showmodal(b) {
         //$b=b;
@@ -153,7 +151,6 @@ include_once "API/head.php";
         $('#caozuobutton').html("<a class=\"btn-floating btn-large blue-grey lighten-3\" onclick=\"showcaozuo()\">操作</a>")
     }
 </script>
-
 
 </body>
 </html>
