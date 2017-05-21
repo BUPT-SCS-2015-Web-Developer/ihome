@@ -1,5 +1,3 @@
-
-
 * {
     font-family:"Microsoft YaHei","Microsoft Yahei","微软雅黑",微软雅黑,"SimHei","Simhei","黑体",黑体,arial;
 }
@@ -84,13 +82,17 @@ nav,nav .brand-logo,nav ul a {
     line-height: 22px;
     padding: 8px 0 9px;
 }
-#sortBox {
+.sortBox {
     position: absolute;
     right:8px;
     bottom:0px;
 }
-
-#sortBox a {
+.sortBox2 {
+    top:48px!important;
+    bottom:auto;
+    right:8px;
+}
+.sortBox a {
     position:relative;
     text-decoration: none;
     color:rgb(50,50,50);
@@ -157,9 +159,10 @@ nav,nav .brand-logo,nav ul a {
 .timeBox {
     position: absolute;
     right:9px;
-    top:2px;
+    bottom:15px;
     color:#8590a6;
 }
+
 
 .otherBox {
     color:#8590a6;
