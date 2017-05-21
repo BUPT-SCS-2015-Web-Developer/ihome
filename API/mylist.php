@@ -12,6 +12,16 @@
     if(!array_key_exists('school_id', $_SESSION))
         exit(json_encode(array('status'=>'login first')));
 
+    if(array_key_exists('type', $_REQUEST))
+        $type = htmlspecialchars($_REQUEST['type']);
+    else
+        $type = 'solved';
+    if($type=='solved')
+        $type = '1';
+    else {
+        $type = '0';
+    }
+
     $sql_query = "SELECT
         `id`,
         `type`,
@@ -22,7 +32,7 @@
         `hot`,
         `is_reply`,
         `reply`
-        from `ihome_question` WHERE `create_user` = '".$_SESSION['school_id']."'";
+        from `ihome_question` WHERE `create_user` = '".$_SESSION['school_id']."' and `is_reply` = '".$type."'";
     $result = $db->query($sql_query);
     $res = array('status' => 'success','data' => array());
     if($result == True){

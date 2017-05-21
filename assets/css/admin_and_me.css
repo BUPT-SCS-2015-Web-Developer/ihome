@@ -1,4 +1,4 @@
-
+﻿
 
 * {
     font-family:"Microsoft YaHei","Microsoft Yahei","微软雅黑",微软雅黑,"SimHei","Simhei","黑体",黑体,arial;
@@ -23,5 +23,9 @@ p {
     margin-top:30px;
     padding:20px;
     padding-top:35px;
+}
+
+.caozuo {
+   color:#ffffff!important;
 }
 
